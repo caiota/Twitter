@@ -36,4 +36,19 @@ Os caracteres suportados até agora são:
 - ### Remover Tweets baseado em Palavras pre-definidas por você
   Você também pode remover tweets que contenham palavras ou termos especificos definidos por você, usando da forma certa pode ser eficiente contra muitos tipos de BOTS e SPAMS. Esta função suporta o Uso de RegEx nas palavras para escanear usando Filtros super personalizados da sintaxe RegEx!
   Também suporta apenas ocultar a palavra encontrada ao invés de remover todo o tweet.
-  ![Lista predefinida de palavras banidas](img/)
+
+  ![Lista predefinida de palavras banidas](img/predefinidas.png)
+
+
+- ## Outros Filtros Genéricos
+  A extensão também possúi outros filtros genéricos para remover tweets indesejados como
+  - Tweets com LETRAS GRANDES
+  - Tweets que contenham Votações
+  - Tweets que contenham Links externos
+  - Tweets que contenham Somente Emotes
+  - Retweets próprios
+  - Tweets com imagem carregada de um site (Video Falso)
+  - Anúncios (tweets patrocinados)
+  - Tweets de Usuários sem Foto
+  ![Lista predefinida de palavras banidas](img/extraFiltros.png)
+  
