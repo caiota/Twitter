@@ -70,4 +70,16 @@ Os caracteres suportados até agora são:
      Procura e remove todos os tweets que sejam parecidos em questão de texto usando Similaridade de Jaccard
      Você pode habilitar a opção Ignorar Links, Menções e Espaçamentos para filtrar APENAS o texto puro dos tweets, aumentando a probabilidade de serem pegos pelo filtro e também pode configurar em porcentagem o quão parecidos os tweets devem ser para serem considerados iguais pela Extensão. 
     
-  ![Lista predefinida de palavras banidas](img/extraFiltros.png)
+  ![Lista predefinida de palavras banidas](img/semelhantes.png)
+
+
+   - ## Controles de Mídia
+     Essa lista contém funcionalidades relacionados á Mídia e o Modo Streamer. Você pode evitar que vídeos sejam tocados automáticamente, ou até mesmo censurar todas as mídias de forma automática.
+
+     - Pausar Vídeos e Gifs e habilitar controle via Teclado
+       Habilita o controle nos vídeos pelo teclado (setas do nouse) e evita que os vídeos e gifs sejam reproduzidos automáticamente, tocando apenas ao passar o mouse por cima delas!
+
+     - Habilitar Reprodução automática de Vídeos do Youtube
+       Ativa o recurso de carregamento automático de vídeos do youtube, assim que aparecem na tela eles são carregados e reproduzidos (pode consumir muita CPU)
+
+     - 
