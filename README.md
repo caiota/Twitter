@@ -46,9 +46,28 @@ Os caracteres suportados até agora são:
   - Tweets que contenham Votações
   - Tweets que contenham Links externos
   - Tweets que contenham Somente Emotes
+  - Tweets automátizados
   - Retweets próprios
   - Tweets com imagem carregada de um site (Video Falso)
   - Anúncios (tweets patrocinados)
   - Tweets de Usuários sem Foto
+    
   ![Lista predefinida de palavras banidas](img/extraFiltros.png)
+
+
+  - ## Também, claro opções extras para melhorar a navegação
+    A extensão também possúi algumas opções para melhorar a navegação
+    - Previsão de Imagens
+       - Habilita a previsão de imagens, passar o mouse por cima de imagens das postagens faz com que a imagem original seja carregada em um "popup" que segue o mouse. Você pode usar o Scroll do Mouse com a tecla Control para aplicar zoom ou remover o zoom das imagens e pode usar Control + S para abrir a imagem em uma nova guia!
+     
+    - Bloquear Usuários ao detectar nos filtros
+       - Bloqueia automaticamente usuários que são detectados em filtros específicos
+      Os filtros são: Lista de Palavras bloqueadas, Filtro de LETRAS GRANDES e Filtro de Tweets Automátizados
+
+
   
+   - ## Filtro de Tweets semelhantes
+     Procura e remove todos os tweets que sejam parecidos em questão de texto usando Similaridade de Jaccard
+     Você pode habilitar a opção Ignorar Links, Menções e Espaçamentos para filtrar APENAS o texto puro dos tweets, aumentando a probabilidade de serem pegos pelo filtro e também pode configurar em porcentagem o quão parecidos os tweets devem ser para serem considerados iguais pela Extensão. 
+    
+  ![Lista predefinida de palavras banidas](img/extraFiltros.png)
