@@ -88,4 +88,4 @@ Os caracteres suportados até agora são:
      - Censurar Toda a Mídia (Modo Streamer)
        Censura todas as imagens e vídeos do twitter, a censura é removida ao passar o mouse por cima delas.
     
-  ![Lista predefinida de palavras banidas](img/midias.png)
+  ![Lista predefinida de palavras banidas](img/midia.png)
