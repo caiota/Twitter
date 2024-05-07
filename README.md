@@ -82,4 +82,10 @@ Os caracteres suportados até agora são:
      - Habilitar Reprodução automática de Vídeos do Youtube
        Ativa o recurso de carregamento automático de vídeos do youtube, assim que aparecem na tela eles são carregados e reproduzidos (pode consumir muita CPU)
 
-     - 
+     - Revelar Mídia censurada pelo twitter
+       Automaticamente remove a censura de imagens e vídeos do twitter.
+
+     - Censurar Toda a Mídia (Modo Streamer)
+       Censura todas as imagens e vídeos do twitter, a censura é removida ao passar o mouse por cima delas.
+    
+  ![Lista predefinida de palavras banidas](img/midias.png)
