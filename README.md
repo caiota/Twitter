@@ -16,15 +16,14 @@ Os caracteres suportados até agora são:
 - Russo
 - Árabe
 - Hebraico
+- Coreano
 - Indo-Arianas (como Hindí e Nepalês)
 - Vietnamita
 - Tailândes
 - Grego
- Os tweets são escaneados usando padrões RegRex, como **'\\uAC00-\\uD7AF\\u1100-\\u11FF\\u3130-\\u318F'** e afetam todo o conteúdo do Tweet (oque pode e deve afetar pessoas com caracteres especiais nos Nomes)
+ Os tweets são escaneados usando padrões RegEx, como **'\\uAC00-\\uD7AF\\u1100-\\u11FF\\u3130-\\u318F'** e afetam todo o conteúdo do Tweet (oque pode e deve afetar pessoas com caracteres especiais nos Nomes)
 
-![Lista de Idiomas Suportados](imgs/idiomas.png)
-
-
+![Lista de Idiomas Suportados](img/idiomas.png)
 
 
 
@@ -32,4 +31,9 @@ Os caracteres suportados até agora são:
 
 
 
-- ### Remvoer Tweets baseado em
+
+
+- ### Remover Tweets baseado em Palavras pre-definidas por você
+  Você também pode remover tweets que contenham palavras ou termos especificos definidos por você, usando da forma certa pode ser eficiente contra muitos tipos de BOTS e SPAMS. Esta função suporta o Uso de RegEx nas palavras para escanear usando Filtros super personalizados da sintaxe RegEx!
+  Também suporta apenas ocultar a palavra encontrada ao invés de remover todo o tweet.
+  ![Lista predefinida de palavras banidas](img/)
