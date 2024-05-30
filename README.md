@@ -89,3 +89,6 @@ Os caracteres suportados até agora são:
        Censura todas as imagens e vídeos do twitter, a censura é removida ao passar o mouse por cima delas.
     
   ![Lista predefinida de palavras banidas](img/midia.png)
+
+  # MAIS EM BREVE !
+   - A extensão recebe atualizações constantes, caso tenha alguma sugestão ou bug pode me contactar no Twitter: https://x.com/CaiotaGames
