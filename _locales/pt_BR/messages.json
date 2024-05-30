@@ -1,0 +1,273 @@
+{
+    "extensionName": {
+      "message": "Controle de Feed para Twitter",
+      "description": "Extensão para adicionar elementos extras no Twitter, como bloqueio automático de bots e muito mais!"
+    },
+    "description": {
+      "message": "Extensão para adicionar elementos extras no Twitter, como bloqueio automático de bots e muito mais!"
+    },
+    "context_title":{
+      "message":"Adicionar ao Filtro de Palavras Banidas"
+    },
+    "updates_notes": {
+      "message": "Notas desta Versão"
+    },
+    "lang": {
+      "message": "pt_BR"
+    },
+    "reload_tip": {
+      "message": "É sempre melhor recarregar o Twitter ao mudar alguma configuração."
+    },
+    "fastBlock_tip":{
+      "message":  "Bloquear Usuário"
+    },
+    "fastMute_tip":{
+      "message":  "Silenciar Usuário"
+    },
+    "fastseeLess_tip":{
+      "message":  "Ver Menos deste Usuário"
+    },
+    "fastQuotes_tip":{
+      "message":  "Ver Respostas (Quotes)"
+    },
+    "fastReport_tip":{
+      "message":  "Reportar Tweet para a Extensão (ainda não implementado)"
+    },
+    "legends_filter_config": {
+      "message": "Configurações dos Filtros"
+    },
+    "legends_tweet_languages": {
+      "message": "Tweets em Outros Idiomas"
+    },
+    "legends_banned_words": {
+      "message": "Filtros por Palavras Banidas"
+    },
+    "legends_visual_filters": {
+      "message": "Personalização Visual"
+    },
+    "legends_extra_tools": {
+      "message": "Ferramentas Extras"
+    },
+    "legends_spam_filter": {
+      "message": "Filtro de Tweets Semelhantes (Anti-Spam)",
+      "description":""
+    },
+    "legends_media_control": {
+      "message": "Controles de Mídia",
+      "description":""
+    },
+    "legends_tweet_links": {
+      "message": "Tweets com Links",
+      "description":""
+    },
+    "legends_fast_actions": {
+      "message": "Ações Rápidas nos Tweets",
+      "description":""
+    },
+    "filter_names":{
+     "message":"Aplicar Filtros no Nome de Usuário",
+     "description":"Aplica os Filtros no Conteúdo do Tweet e no Nome de Usuário que Postou. Desativar irá aplicar os filtros APENAS no Conteúdo do Tweet"
+    },
+    "filter_urlPreview":{
+     "message":"Aplicar Filtros nas Previsões de URL",
+     "description":"Aplica os Filtros nos Cards de Previsões de URLs (quando você digita um site e aparece um 'Resumo' dele). Útil quando o Card possúi alguma Informação que gostaria de bloquear"
+    },
+    "filter_Trends":{
+     "message":"Aplicar Filtros nas Trends (Assuntos do Momento)",
+     "description":"Aplica os Filtros nas Trends do Twitter, caso queira ocultar Assuntos do Momento relacionados á Política, basta inserir a Palavra 'Política' no filtro de Palavras Personalizadas"
+    },
+    "orange_tweet":{
+     "message":"Escurecer Tweet ao Invés de Remover",
+     "description":"Escurece e Muda para um Fundo Laranja, os Tweets afetados por algum filtro ao invés de remove-lo. (Útil para testar os filtros)"
+    },
+
+
+    "oriental_tweets":{
+     "message":"Remover Tweets com Caracteres em Chinês e Japonês"
+    },
+    "corean_tweets":{
+     "message":"Remover Tweets com Caracteres em Coreano"
+    },
+    "russian_tweets":{
+     "message":"Remover Tweets com Caracteres em Russo"
+    },
+    "arabian_tweets":{
+     "message":"Remover Tweets com Caracteres em Árabe"
+    },
+    "hebraic_tweets":{
+     "message":"Remover Tweets com Caracteres em Hebraico"
+    },
+    "ariana_tweets":{
+     "message":"Remover Tweets com Caracteres em Indo-Arianas"
+    },
+    "vietnamita_tweets":{
+     "message":"Remover Tweets com Caracteres em Vietnamita"
+    },
+    "thailand_tweets":{
+     "message":"Remover Tweets com Caracteres em Tailândes"
+    },
+    "greek_tweets":{
+     "message":"Remover Tweets com Caracteres em Grego"
+    },
+    "amaric_tweets":{
+     "message":"Remover Tweets com Caracteres em Amárico"
+    },
+
+
+    
+    "full_word":{
+      "message":"Aplicar Filtro apenas em Palavras Completas",
+      "description":"Aplica o Filtro apenas se for identificado uma Palavra Completa."
+     },
+     "use_regex":{
+      "message":"Aplicar Filtro usando RegEx",
+      "description":"Melhora o Filtro deixando-o mais Agressivo aplicando o filtro dentro das palavras, mas pode afetar tweets inocentes como por Exemplo o Filtro 'porn' irá ser ativado em palavras não-relacionadas como 'pornélio', recomenda-se deixar desativado caso tenha problemas ou considere melhorar os filtros Manuais colocando palavras mais completas."
+     },
+     "enable_Wordfilter":{
+      "message":"Ativar Filtro de Palavras Banidas",
+      "description":"Remove Tweets que contém Termos Definidos por Você, digite abaixo as palavras que quer Filtrar nos Tweets separando um Elemento por Linha. Você pode escrever oque quiser, caso queira por exemplo banir algum site basta coloca-lo com o prefixo como por exemplo Google.com/ ao invés de só Google"
+     },
+     "obfusc_word":{
+      "message":"Ofuscar as Palavras encontradas ao invés de remover o tweet",
+      "description":"Ofusca as palavras encontradas, deixando-a ilegivel e com um fundo laranja, a palavra é revelada ao passar o mouse por cima :D."
+     },
+
+
+
+
+     "horizontal_menu":{
+      "message":"Menu do Twitter na Horizontal",
+      "description":"Faz com que o Menu do Twitter apareça no Topo da Tela na Horizontal"
+     },
+     "remove_lateralContent":{
+      "message":"Remover Conteúdo Lateral",
+      "description":"Remove conteúdo na direita sobre pessoas que: 'Talvez Você curta' , 'Pessoas Relevantes' e 'Quem Seguir'"
+     },
+
+
+
+     "remove_BigLetters":{
+      "message":"Remover Tweets com ＬＥＴＲＡＳ ＧＩＧＡＮＴＥＳ",
+      "description":"Remove Tweets que contenham esses tipos de Caracteres, geralmente usado por BOTS"
+     },
+     "remove_EmptyTweets":{
+      "message":"Remover Tweets que contenham Apenas Emojis",
+      "description":"Remove os Tweets que contenham Apenas Emotes no conteúdo. Isso ignora tweets que contenham apenas emotes junto com alguma imagem/video no mesmo tweet."
+     },
+     "remove_Polls":{
+      "message":"Remover Tweets com Enquetes",
+      "description":"Remove Automáticamente os Tweets que contenham Votações, como 'Qual seu Time Favorito?' ou 'Qual cor você prefere?'..."
+     },
+     "remove_SelfRetweet":{
+      "message":"Remover Tweets com Retweets Próprios",
+      "description":"Remove Automáticamente tweets que contenham apenas um Retweet de sí próprio (como por exemplo alguém chega na sua postagem e posta um OUTRO tweet dela mesma)."
+     },
+     "remove_FakeVideos":{
+      "message":"Remover Tweets com 'Vídeos Falsos'",
+      "description":"Remove Tweets que contenham uma Imagem carregada de um Link (quando algum bot posta um Link que mostra uma Imagem com um 'PLAY' nela, e ao clicar é mandado para o site)."
+     },
+     "remove_Automated":{
+      "message":"Remover Tweets Automátizados",
+      "description":"Remove Tweets Automátizados (Tweets que contém o parâmetro 'Automático' inserido pelo Twitter para identificar bots comuns)"
+     },
+     "remove_sponsored":{
+      "message":"Remover Tweets Patrocinados (Anúncios)",
+      "description":"Ativa o Recurso de Detecção e Remove os tweets que sejam Patrocinados automáticamente. Não é tão eficiente quanto um bom bloqueador de anúncios, já que apenas remove os elementos visiveis."
+     },
+     "remove_noPic":{
+      "message":"Remover Tweets de Usuários sem Foto",
+      "description":"Remove Tweets de Pessoas que estão usando a Foto Padrão do Twitter (Sem Foto)."
+     },
+     "remove_fakeContent":{
+      "message":"Remover Tweets Indesejados das Pesquisas",
+      "description":"Remove Tweets na Página de Pesquisa caso o tweet não contenha a palavra especificada no conteúdo de texto. Somente tweets em que o texto contenha oque você pesquisou irá permanecer e o restante será removido."
+     },
+     "enable_searchNotifications":{
+      "message":"Habilitar Pesquisa nas Notificações",
+      "description":"Ativa o Recurso de pesquisa nas notificações usando Ctrl+F. Pode pesquisar por usuário (ou @Usuário) ou tipo de notificação como Retweet, Curtida ou Comentário."
+     },
+     "enable_imgPreview":{
+      "message":"Habilitar Previsão e Zoom de Imagens dos Tweets",
+      "description":"Ativa o Recurso de Previsão da Imagem Completa e Função de Zoom nas Imagens dos Tweets, basta passar o mouse por cima de alguma imagem para ve-la completamente, e usar o Scroll (Ctrl+Scroll Up ou Down) do Mouse para ampliar o zoom dela! (Use os cliques do mouse para ocultar a previsão da Imagem rapidamente e Ctrl + S para salvar a imagem original)."
+     },
+     "block_onFind":{
+      "message":"Bloquear Usuário no Twitter ao Detectar em Algum Filtro",
+      "description":"BLOQUEIA o usuário no twitter automáticamente, quando algum Filtro Específico é aplicado no tweet, potencialmente perigoso se o filtro não for usado corretamente, ou se muitos usuários forem banidos em menos de 10 minutos. Os filtros ativos para esta função são: Filtro de Palavras Banidas, Filtro de Tweets com LETRAS GIGANTES e Filtro de Tweets Automátizados"
+     },
+
+
+
+
+
+     "enable_antiSpam":{
+      "message":"Ativar Filtro de Anti-Spam",
+      "description":""
+     },
+     "antiSpam_ignoreLinks":{
+      "message":"Ignorar os Links, Menções e Multiplos Espaçamentos do Conteúdo",
+      "description":"Ignora todos os Links, Menções e Muitos Espaçamentos dos Conteúdos Filtrados (Aumenta a chance de Tweets Spam serem detectados, já que bots usam o mesmo texto, mas com links, menções e espaçamentos diferentes)"
+     },
+     "antiSpam_percentageFind":{
+      "message":"Medida de Correspondência para Identificar Tweets",
+      "description":"Medidor para Definir o Quão Parecido os Tweets devem ser para serem considerados Parecidos ou Iguais, um valor Muito Baixo (Abaixo de 40%) tem grandes chances de confundir tweets que contenham simplesmente uma palavra ou duas iguais. Use com Cuidado."
+     },
+
+
+     
+     "pauseVideos":{
+      "message":"Pausar Vídeos e Gifs e Habilitar o Controle pelo Teclado",
+      "description":"Pausa Vídeos e Gifs Automáticamente (Os vídeos e gifs são reproduzidos ao passar o mouse por cima deles! Você também pode usar os controles de teclado como Setas para cima, baixo, esquerda e direita para controlar o vídeo e volume, e a tecla Espaço para pausar/reproduzir.)"
+     },
+     "enable_autoYoutube":{
+      "message":"Habilitar Reprodução Automática de Vídeos do YouTube",
+      "description":"Ativa o Recurso de Reprodução Automática de vídeos do Youtube ao carregar (potencialmente problemático, vídeos do youtube embutidos consomem MUITA CPU e memória RAM além de que se vídeos forem carregados com muita frequência, o twitter irá começar a abrir os vídeos em uma nova aba)."
+     },
+     "remove_spoilers":{
+      "message":"Revelar Vídeos e Imagens Censurados pelo Twitter",
+      "description":"Remove Automáticamente a Censura de Vídeos e Imagens assim que elas carregam."
+     },
+     "censuraAll":{
+      "message":"Censurar Todas as Mídias dos Tweets",
+      "description":"Censura Todas as Mídias (Imagens e Vídeos) dos Tweets e Remove a Censura ao Passar o mouse sobre ela."
+     },
+     "keyboardNavigation":{
+      "message":"Ativar a Navegação pelo Teclado (BETA)",
+      "description":"Navega entre os tweets usando apenas as teclas WASD (e setas) do teclado, use W e S para navegar para cima e baixo, D para entrar no tweet selecionado e A para voltar sem usar o mouse."
+     },
+
+
+
+
+     "removeLinks":{
+      "message":"Remover Tweets que contenham Links Externos",
+      "description":"Remove Automáticamente os Tweets que contenham Links para sites Externos"
+     },
+     "remove_OnlyLinks":{
+      "message":"Filtrar apenas Tweets que contenham LINKS (sem texto)",
+      "description":"Filtra e Remove apenas os Tweets que contenham Links (sem imagens, vídeos ou texto)"
+     },
+
+
+     "fastReport":{
+      "message":"Mostrar Botão de Reportar Tweet para a Extensão (ainda não implementado)",
+      "description":"Mostra a Opção de Reportar Tweets para o Algorítimo da Extensão, que sincroniza com os outros usuários para ocultar o mesmo tweet para todos."
+     },
+     "fastBlock":{
+      "message":"Mostrar Botão de Bloquear Usuário rápidamente",
+      "description":"Mostra a Opção de Bloquear o Usuário no Twitter Rápidamente."
+     },
+     "fastSeeless":{
+      "message":"Mostrar Botão de 'Ver Menos deste Usuário' rápidamente",
+      "description":"Mostra a Opção de 'Ver Menos deste Usuário' Rápidamente. Só funciona na Página Principal, na aba 'Para Você'."
+     },
+     "fastMute":{
+      "message":"Mostrar Botão de Silenciar Usuário rápidamente",
+      "description":"Mostra a Opção de Silenciar Usuário Rápidamente."
+     },
+     "fastQuotes":{
+      "message":"Mostrar Botão de Ver Respostas rápidamente",
+      "description":"Mostra a Opção de Ver os Retweets (Quotes) Rápidamente."
+     }
+     
+     
+  }

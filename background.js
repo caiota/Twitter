@@ -1,4 +1,6 @@
-var BANNED_ITEMS_PADRAO = [
+"use strict";
+
+const BANNED_ITEMS_PADRAO = [
   'link in bio',
   'onlyfans.com/',
   'privacy.com/',
@@ -8,30 +10,32 @@ var BANNED_ITEMS_PADRAO = [
   '░B░I░O',
   'ＬＩＮＫ ＩＮ ＢＩＯ',
   't.me/'
-]
-var FUNCTION_SETTINGS_PADRAO = {
+];
+
+const FUNCTION_SETTINGS_PADRAO = {
   ANTI_SPOILER: false,
-  CENSURA_TUDO:false,
-  NOTIFICATIONS:false,
+  CENSURA_TUDO: false,
   VIDEO_AUTO_PAUSE: true,
-  PREVIEW_IMAGES:true,
-  SELF_TWEET:false,
-  NO_REMOVE:true,
-  AUTOPLAY_YOUTUBE:false,
-  HORIZONTAL_MENU:true,
-  REMOVE_NOPIC_USER:false,
-  REMOVE_SPONSORED:true,
-  FAKE_VIDEO_BAIT:false,
+  KEYBOARD_NAVIGATION: true,
+  PREVIEW_IMAGES: true,
+  SELF_TWEET: false,
+  NO_REMOVE: true,
+  AUTOPLAY_YOUTUBE: false,
+  HORIZONTAL_MENU: true,
+  REMOVE_RIGHT_CONTENT: false,
+  REMOVE_NOPIC_USER: false,
+  REMOVE_SPONSORED: true,
+  FAKE_VIDEO_BAIT: false,
+  NOTIFICATION_SEARCH:true,
   Tweet_Scan_Palavras: {
-    RemoveAutomated:true,
-    NaoRemover_Customizadas:false,
-    Block_User:false,
+    RemoveAutomated: true,
+    NaoRemover_Customizadas: false,
+    Block_User: false,
     todo_tweet: false,
-    Scan_Cards:true,
-    FullWord:false,
-    TweetEmotes:false,
-    Scam_Conhecido: true,
-    LetrasGrandes:true,
+    Scan_Cards: true,
+    FullWord: false,
+    TweetEmotes: false,
+    LetrasGrandes: true,
     use_regex: true,
     remove_arabe: true,
     remove_asiatico: true,
@@ -44,209 +48,204 @@ var FUNCTION_SETTINGS_PADRAO = {
     remove_tailandes: true,
     remove_grego: true,
     PalavrasCustomizadas: true,
-    Trendings:true
+    Trendings: true,
+    clearSearch:false
   },
   Remover_Enquetes: false,
   Remover_Links: {
     ativo: false,
     onlyLink: false
   },
-  TWEET_SPAM:{
-    ativo:false,
-    removeLinks:true,
-    Parecidagem:0.8,
+  TWEET_SPAM: {
+    ativo: false,
+    removeLinks: true,
+    Parecidagem: 0.8
   },
-  SHORTCUTS:{
-    fast_block:true,
-    report_tweet:false,
-    view_less:false,
-    mute_user:true,
-  
+  SHORTCUTS: {
+    fast_block: true,
+    report_tweet: false,
+    view_less: false,
+    mute_user: true,
+    view_quotes: true
+  }
+};
+
+let SCRIPT_READY = false;
+
+chrome.tabs.onCreated.addListener(tab => {
+  if (SCRIPT_READY && tab.status === "complete") {
+    startScript(tab.id);
+  }
+});
+
+function startScript(tabId) {
+  if (SCRIPT_READY) {
+    setTimeout(() => {
+      CARREGAR_PALAVRAS_PREDEFINIDAS("popup");
+      CARREGAR_FUNCOES("popup");
+    }, 200);
   }
 }
-
-chrome.tabs.onCreated.addListener((tab) => {
- if(tab.status==="complete"){
-  startScript(tab.id) 
- }
-});
-
-
-
-chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
- 
-});
-
-function startScript(tab){
-      
-  
-  setTimeout(()=>{CARREGAR_PALAVRAS_PREDEFINIDAS();CARREGAR_FUNCOES();},100);
-  
-}
-let currentTabId;
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-if (changeInfo.status === 'complete' && tab.url.includes("twitter.com/")) {
-  
-
-  setTimeout(()=>{CARREGAR_PALAVRAS_PREDEFINIDAS();CARREGAR_FUNCOES();},100);
-}
-});
-function onDomLoaded(details) {
-  setTimeout(function(){
-
-    startScript(details.tabId);
-  },1000)
-  
-}
-
-chrome.webNavigation.onDOMContentLoaded.addListener(onDomLoaded);
-
-
-
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  // Verifica se a mensagem é para abrir a nova aba da extensão
-  if (message.action === 'save_customWords') {
-    SALVAR_PALAVRAS_PREDEFINIDAS(message.message);
-    sendResponse({ status: "Filtros Salvos"});
-    
-    CARREGAR_PALAVRAS_PREDEFINIDAS();
-  
+  if (SCRIPT_READY && changeInfo.status === 'complete' && (tab.url.includes("twitter.com/") || tab.url.includes("x.com/"))) {
+    CARREGAR_PALAVRAS_PREDEFINIDAS("popup");
+    CARREGAR_FUNCOES("popup");
   }
-  else if(message.action=="async_bannedWords"){
-    CARREGAR_PALAVRAS_PREDEFINIDAS();
-  }
-  else if (message.action === 'save_functions') {
-    SALVAR_FUNCOES(message.message);
-    sendResponse({ status: "Funções Salvas"});
-  
-  }
-  else if(message.action=="async_enabledFunctions"){
-    CARREGAR_FUNCOES();
-  }
-  
 });
 
+chrome.tabs.onRemoved.addListener(() => {
+  // Clean up state if necessary
+});
+
+let port = {
+  postMessage: () => false
+};
+
+chrome.runtime.onConnect.addListener(porte => {
+  port = porte;
+  console.assert(port.name === "ttextensionframeworkofaverybigwordohmygodman");
+  port.onDisconnect.addListener(() => {
+    port = { postMessage: () => false };
+  });
+  port.onMessage.addListener(message => {
+    switch (message.action) {
+      case "SCRIPT_POPUP_READY":
+        port.postMessage({ action: "SCRIPT_POPUP_READY" });
+        break;
+      case "save_customWords":
+        SALVAR_PALAVRAS_PREDEFINIDAS(message.message);
+        break;
+      case "async_bannedWords":
+        CARREGAR_PALAVRAS_PREDEFINIDAS(message.tipo);
+        break;
+      case "save_functions":
+        SALVAR_FUNCOES(message.message);
+        break;
+      case "async_enabledFunctions":
+        CARREGAR_FUNCOES(message.tipo);
+        break;
+    }
+  });
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  try {
+    switch (message.action) {
+      case "SCRIPT_READY":
+        SCRIPT_READY = true;
+        sendResponse({ success: true });
+        break;
+      case "save_customWords":
+        SALVAR_PALAVRAS_PREDEFINIDAS(message.message);
+        break;
+      case "async_bannedWords":
+        CARREGAR_PALAVRAS_PREDEFINIDAS(message.tipo);
+        break;
+      case "save_functions":
+        SALVAR_FUNCOES(message.message);
+        break;
+      case "async_enabledFunctions":
+        CARREGAR_FUNCOES(message.tipo);
+        break;
+    }
+    return true;
+  } catch (e) {
+    console.error("ERRO: " + e);
+  }
+});
 
 function SALVAR_PALAVRAS_PREDEFINIDAS(array_extra) {
-  chrome.storage.local.get({ palavrasPredefinidas: BANNED_ITEMS_PADRAO }, function(data) {
+  const dadosUnicos = [...new Set(array_extra.filter(value => value.trim() !== ""))];
 
-      if (chrome.runtime.lastError) {
-          console.error("Erro ao recuperar os dados:", chrome.runtime.lastError);
-          return false;
-      }
-    var dados = array_extra.filter(function(value) {
-      return value !== ""; 
-  });
-      chrome.storage.local.set({ "palavrasPredefinidas": dados }, function() {
-          console.log("Novo item adicionado com sucesso:", dados);
-          CARREGAR_PALAVRAS_PREDEFINIDAS();
-          return true;
-      });
+  chrome.storage.local.get({ palavrasPredefinidas: BANNED_ITEMS_PADRAO }, data => {
+    chrome.storage.local.set({ "palavrasPredefinidas": dadosUnicos }, () => {
+      setTimeout(() => { CARREGAR_PALAVRAS_PREDEFINIDAS("popup") }, 500);
+      return true;
+    });
   });
 }
 
-function CARREGAR_PALAVRAS_PREDEFINIDAS(){
-  chrome.storage.local.get({ palavrasPredefinidas: BANNED_ITEMS_PADRAO }, function(data) {
-
-    chrome.tabs.query({ url: "*://twitter.com/*" }, function(tabs) {
-    tabs.forEach(function(tab) {
-        chrome.tabs.sendMessage(tab.id, { action: 'Reload_BannedWords',  data });
+function CARREGAR_PALAVRAS_PREDEFINIDAS(tipo) {
+  chrome.storage.local.get({ palavrasPredefinidas: BANNED_ITEMS_PADRAO }, data => {
+    chrome.tabs.query({ url: "*://twitter.com/*" }, tabs => {
+      tabs.forEach(tab => {
+        chrome.tabs.sendMessage(tab.id, { action: 'Reload_BannedWords', data });
+      });
     });
-});
-
-chrome.runtime.sendMessage({ action: "Reload_BannedWords",  data });
-
-return data;
+    chrome.tabs.query({ url: "*://x.com/*" }, tabs => {
+      tabs.forEach(tab => {
+        chrome.tabs.sendMessage(tab.id, { action: 'Reload_BannedWords', data });
+      });
+    });
+    port.postMessage({ action: 'Reload_BannedWords', data });
   });
 }
 
 function SALVAR_FUNCOES(functions) {
-  chrome.storage.local.get({ funcoesConfigs: FUNCTION_SETTINGS_PADRAO }, function(data) {
-
-      if (chrome.runtime.lastError) {
-          console.error("Erro ao recuperar os dados:", chrome.runtime.lastError);
-          return false;
-      }
-    var dados = functions;
-
-      chrome.storage.local.set({ "funcoesConfigs": dados }, function() {
-          console.log("Novo item adicionado com sucesso:", dados);
-          CARREGAR_FUNCOES();
-          return true;
-      });
-  });
-}
-function CARREGAR_FUNCOES(){
-  chrome.storage.local.get({ funcoesConfigs: FUNCTION_SETTINGS_PADRAO }, function(data) {
-
-    chrome.tabs.query({ url: "*://twitter.com/*" }, function(tabs) {
-    tabs.forEach(function(tab) {
-        chrome.tabs.sendMessage(tab.id, { action: 'async_enabledFunctions',  data });
+  chrome.storage.local.get({ funcoesConfigs: FUNCTION_SETTINGS_PADRAO }, data => {
+    chrome.storage.local.set({ "funcoesConfigs": functions }, () => {
+      CARREGAR_FUNCOES("popup");
+      return true;
     });
-});
-
-chrome.runtime.sendMessage({ action: "async_enabledFunctions",  data });
-
-return data;
   });
 }
 
-    
-  chrome.contextMenus.onClicked.addListener((info, tab) => {
-    if (info.menuItemId === "BanirPalavra") {
-      
+function CARREGAR_FUNCOES(tipo) {
+  chrome.storage.local.get({ funcoesConfigs: FUNCTION_SETTINGS_PADRAO }, data => {
+    chrome.tabs.query({ url: "*://twitter.com/*" }, tabs => {
+      tabs.forEach(tab => {
+        chrome.tabs.sendMessage(tab.id, { action: 'async_enabledFunctions', data });
+      });
+    });
+    chrome.tabs.query({ url: "*://x.com/*" }, tabs => {
+      tabs.forEach(tab => {
+        chrome.tabs.sendMessage(tab.id, { action: 'async_enabledFunctions', data });
+      });
+    });
+    if (tipo === "popup") {
+      port.postMessage({ action: 'async_enabledFunctions', data });
+    }
+    return data;
+  });
+}
 
-      if (info.selectionText.trim() !== "") {
-        const textoSemEspeciais = info.selectionText.replace(/[.*+?^${}()|[\]\\]/g, "");
-        chrome.storage.local.get({ palavrasPredefinidas: BANNED_ITEMS_PADRAO }, function(data) {
-          console.log(data.palavrasPredefinidas);
-          if (!data.palavrasPredefinidas.includes(textoSemEspeciais)) {
-            data.palavrasPredefinidas.push(textoSemEspeciais);
-  
-            chrome.storage.local.set({ "palavrasPredefinidas": data.palavrasPredefinidas }, function() {
-              console.log("Novo item adicionado com sucesso:", data.palavrasPredefinidas);
-              CARREGAR_PALAVRAS_PREDEFINIDAS();
-            });
-          }
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  if (info.menuItemId === "BanirPalavra" && info.selectionText.trim() !== "") {
+    const urlPattern = new RegExp('^(https?:\\/\\/)?' + 
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + 
+      '((\\d{1,3}\\.){3}\\d{1,3}))' + 
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + 
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + 
+      '(\\#[-a-z\\d_]*)?$', 'i');
+
+    let textoSemEspeciais = urlPattern.test(info.selectionText.trim())
+      ? info.selectionText
+      : info.selectionText.replace(/[*+?^${}()|[\]\\]/g, "");
+
+    chrome.storage.local.get({ palavrasPredefinidas: BANNED_ITEMS_PADRAO }, data => {
+      if (!data.palavrasPredefinidas.includes(textoSemEspeciais)) {
+        data.palavrasPredefinidas.push(textoSemEspeciais);
+        chrome.storage.local.set({ "palavrasPredefinidas": data.palavrasPredefinidas }, () => {
+          CARREGAR_PALAVRAS_PREDEFINIDAS("popup");
         });
       }
-    }
-  });
-  
-
-  chrome.runtime.onInstalled.addListener(function(details) {
-
-    chrome.contextMenus.create({
-      id: "BanirPalavra",
-      title: "Adicionar ao Filtro de Palavras Customizadas",
-      contexts: ["selection"] 
     });
+  }
+});
 
-//SALVAR_PALAVRAS_PREDEFINIDAS
-    if(details.reason=="install"){
-      SALVAR_PALAVRAS_PREDEFINIDAS(BANNED_ITEMS_PADRAO);
-      SALVAR_FUNCOES(FUNCTION_SETTINGS_PADRAO);
-
-      chrome.tabs.query({ url: "*://twitter.com/*" }, function(tabs) {
-        tabs.forEach(function(tab) {
-      chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        files: ['SCRIPT/TWITTER/TWITTER.js']
-    });
-    chrome.scripting.insertCSS({
-        target: { tabId: tab.id },
-        files: ['SCRIPT/TWITTER/TWITTER.css']
-    });
-    
-
-      
-      setTimeout(()=>{CARREGAR_PALAVRAS_PREDEFINIDAS();CARREGAR_FUNCOES();},500);
-        })
+var contextTitle=chrome.i18n.getMessage("context_title");
+chrome.runtime.onInstalled.addListener(details => {
+  chrome.contextMenus.create({
+    id: "BanirPalavra",
+    title: contextTitle,
+    contexts: ["selection"]
   });
-    }
 
-    chrome.tabs.create({ url: "start.html" });
-  });
-   
-     
+  if (details.reason === "install") {
+    SALVAR_PALAVRAS_PREDEFINIDAS(BANNED_ITEMS_PADRAO);
+    SALVAR_FUNCOES(FUNCTION_SETTINGS_PADRAO);
+  }
+
+  chrome.tabs.create({ url: "wc/"+chrome.i18n.getMessage("lang")+"/start.html" });
+});

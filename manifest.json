@@ -1,20 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "DEV - Controle de Feed para Twitter",
-  "description": "Extensão para adicionar elementos extras no X, como bloqueio automático de bots e muito mais!",
-  "version": "1.13.1",
-  "permissions": ["scripting","tabs","storage","activeTab","webNavigation","contextMenus"],
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_description__",
+  "version": "1.15.1",
+  "default_locale": "pt_BR",
+  "permissions": ["tabs","storage","activeTab","contextMenus"],
   "content_scripts": [
     {
-      "matches": ["https://*.twitter.com/*"],
+      "matches": ["https://*.twitter.com/*","https://*.x.com/*"],
       "runAt" : "document_end",
       "css": ["SCRIPT/TWITTER/TWITTER.css"],
       "js": ["SCRIPT/TWITTER/TWITTER.js"]
     }
-  ],
-  "host_permissions": [
-    "https://twitter.com/*",
-    "https://*.twitter.com/*"
   ],
   
    "background": {
@@ -26,11 +23,11 @@
   },
   
   "icons": {
-    "16": "icon.png",
-    "32": "icon.png",
-    "48": "icon.png",
-    "128": "icon.png",
-    "512": "icon.png"
-  }
+    "16": "icon_16x16.png",
+    "32": "icon_32x32.png",
+    "48": "icon_48x48.png",
+    "128": "icon_128x128.png",
+    "512": "icon_512x512.png"
+}
 }
 

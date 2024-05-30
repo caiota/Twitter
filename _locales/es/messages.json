@@ -1,0 +1,10 @@
+{
+    "extensionName": {
+      "message": "Feed Control for Twitter",
+      "description": "Extension to add extra elements to Twitter, such as automatic bot blocking and more!"
+    },
+    "greeting": {
+      "message": "Hello!",
+      "description": "Greeting message"
+    }
+  }

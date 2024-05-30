@@ -1,479 +1,565 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            min-width: 700px;
-    user-select: none;
-    color: white;
-    background: rgb(1, 13, 56);
-    padding: 4px;
-    text-align: -webkit-match-parent;
-    font-family: sans-serif;
-        }
-        
-        /* Estilo do popup */
-        .popup {
-            position: relative;
-            display: inline-block;
-    width: 100%;
-        }
-        .popuptext img{
-            max-width: -webkit-fill-available;
-        }
-        .popup .popuptext {
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+         /*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+body {
+         min-width: 700px;
+         -webkit-user-select: none;
+            -moz-user-select: none;
+             -ms-user-select: none;
+                 user-select: none;
+         color: white;
+         background: rgb(1, 6, 26);
+         padding: 4px;
+         text-align: -webkit-match-parent;
+         font-family: sans-serif;
+         font-weight: bolder;
+         }
+         /* Estilo do popup */
+         .popup {
+         position: relative;
+         display: inline-block;
+         width: 100%;
+         }
+         .popuptext img{
+         max-width: -webkit-fill-available;
+         }
+         .popup .popuptext {
          visibility: hidden;
-    max-width: 400px;
-    background-color: indianred;
-    color: #fff;
-    inline-size: max-content;
-    text-align: -webkit-left;
-    border-radius: 6px;
-    padding: 8px;
-    font-size: initial;
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    margin-left: -60px;
-    font-weight: lighter;
-        }
-        .popup:hover .popuptext {
-            visibility: visible;
-        }
-        .subBox{
-    font-size: medium;
-        }
-      
-
-.popup:last-child .line {
-    height: 50%;
-}
-
-.popup:last-child .line {
-    height: 50%;
-}
-
-.custom-checkbox {
-    display: inline-block;
-    position: relative;
-}
-
-.custom-checkbox input[type="checkbox"] {
-    position: absolute;
-    opacity: 0;
-}
-
-.custom-checkbox label {
-    display: inline-block;
-    cursor: pointer;
-}
-
-.custom-checkbox label:before {
-    content: "";
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background-color: #ccc; /* Cor de fundo padrão */
-    border: 1px solid #999; /* Borda do checkbox */
-    border-radius: 3px; /* Borda arredondada */
-    margin-right: 10px; /* Espaço entre o checkbox e o texto */
-}
-
-.custom-checkbox input[type="checkbox"]:checked + label:before {
-    background-color: brown;
-}
-/* Estilo básico para o botão do menu */
-.dropbtn { 
-    background-color: #01005d;
-  color: #fff;
-  padding: 10px;
-  font-size: xx-large;
-  border: none;
-  cursor: pointer;
-  width: calc(100% - 20px); /* Definindo a largura para ocupar todo o espaço menos o espaço de preenchimento */
-  box-sizing: border-box; /* Garantindo que o preenchimento não aumente a largura além de 100% */
-
-}
-
-/* Estilo para o contêiner dropdown */
-.dropdown {
-  position: relative;
-  display: inline-block; 
-    width: 100%;
-}
-
-/* Estilo para o conteúdo dropdown (inicialmente escondido) */
-.dropdown-content {
-  display: none;
-    height: 100%;
-    width: 100%;
-}
-
-/* Estilo para os links dentro do dropdown */
-.dropdown-content a {
-  color: #333;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Mudar a cor do link quando o mouse passa por cima */
-.dropdown-content a:hover {
-  background-color: #f9f9f9;
-}
-
-/* Mostrar o conteúdo do dropdown quando o botão é clicado */
-.dropdown.open .dropdown-content {
-  display: block;
-}
-textarea#CustomWord{
-    width: 100%;
-    font-family: sans-serif;
-    line-height: 30px;
-    font-weight: bolder;
-    background: rgb(7 29 107);
-    color: white;
-}
-legend{
-    
-    font-size: x-large;
-    padding: 10px;
-    font-weight: bolder;
-}
-.slider-container {
-  margin: 0 auto;
-  font-size: medium;
-}
-
-.slider {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 15px;
-  border-radius: 5px;
-  background: #145575;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #f8ce11;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #f8ce11;
-  cursor: pointer;
-}
-#reloadTip{
-    position: fixed;
-    bottom: 0;
-    background: darkmagenta;
-    padding: 10px;
-    margin: 0;
-    z-index: 10;
-    left: 50%;
-    bottom: 0;
-    transform: translate(-50%);
-    width: 60%;
-    font-weight:bold;
-    display: none;
-}
-    </style>
-</head>
-<body>
-<center>
-<h2>Controle de Feed - Configurações</h2><br>
-<div id="reloadTip">é Sempre melhor recarregar o Twitter ao mudar alguma configuração.</div>
-<hr></center><br>
-
-   
-<div class="dropdown open">
-    <button class="dropbtn" title="clique para Ocultar/Mostrar">Filtros de Conteúdo de Texto Indesejado</button>
-    <div class="dropdown-content" id="myDropdown"><br>
-        
-        <fieldset><legend>Configurações dos Filtros</legend> 
-            <div class="popup">
-                <div class="custom-checkbox"><input type="checkbox" id="box_ScanAllTweet" valor="todo_tweet"><label for="box_ScanAllTweet" class="subBox">Aplicar Filtros no Nome de Usuário</label></div>
-                <div class="popuptext">Aplica os Filtros no Conteúdo do Tweet e no Nome de Usuário que Postou. Desativar irá aplicar os filtros APENAS no Conteúdo do Tweet</div>
-            </div><br>
-            <div class="popup">
-                <div class="custom-checkbox"><input type="checkbox" id="box_ScanUrlCards" valor="tweet_urlCards"><label for="box_ScanUrlCards" class="subBox">Aplicar Filtros nas Previsões de URL</label></div>
-                <div class="popuptext">Aplica os Filtros nos Cards de Previsões de URLs (quando você digita um site e aparece um "Resumo" dele). Útil quando o Card possúi alguma Informação que gostaria de bloquear.<br><img src="IMAGE/videoPreview.png"/></div>
-            </div><br>
-        <div class="popup">
-            <div class="custom-checkbox"><input type="checkbox" id="box_ScanTrends" valor="scan_trends"><label for="box_ScanTrends" class="subBox">Aplicar Filtros nas Trends (Assuntos do Momento)</label></div>
-            <div class="popuptext">Aplica os Filtros nas Trends do Twitter, caso queira ocultar Assuntos do Momento relacionados á Política, basta inserir a Palavra "Política" no filtro de Palavras Personalizadas<br><img src="IMAGE/trendings.png"></div>
-        </div><br>  
-        
-        <div class="popup">
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveComumScam" valor="Scam_Conhecido">
-        <label for="box_RemoveComumScam" class="subBox">Remover Tweets com Scams Comuns</label></div>
-        <div class="popuptext">Remove Tweets com Scams comuns como $PARAM, $BITCOIN e outros termos usados por bots.</div>
-        </div><br>
-        
-        <div class="popup">
-        <div class="custom-checkbox"><input type="checkbox" id="box_FadeOutTweet" valor="FadeOut_Tweet">
-        <label for="box_FadeOutTweet" class="subBox">Escurecer Tweet ao Invés de Remover</label></div>
-        <div class="popuptext">Escurece e Muda para um Fundo Laranja, os Tweets afetados por algum filtro ao invés de remove-lo. (Útil para testar os filtros)</div>
-        </div><br>
-        </fieldset>   
-    <br>
-    <br>
-   
-        <fieldset><legend><div class="popup">Tweets em Outros Idiomas
-            <div class="popuptext">Remove Tweets quando Caracteres de Outros Idiomas são encontrados (AFETA TAMBÉM PESSOAS COM NICKNAMES P£Я$ØИΔŁƗZΔÐØ$ QUANDO A OPÇÃO "Aplicar Filtros no Nome de Usuário" Está ativada!)</div></div></legend>
-       <div class="custom-checkbox"><input type="checkbox" id="box_RemoveAsian" valor="remove_asiatico"><label for="box_RemoveAsian" class="subBox">Remover Tweets com Palavras em Chinês e Japonês</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveKorean" valor="remove_coreano"><label for="box_RemoveKorean" class="subBox">Remover Tweets com Palavras em Coreano</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveRussian" valor="remove_russo"><label for="box_RemoveRussian" class="subBox">Remover Tweets com Palavras em Russo</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveArabian" valor="remove_arabe"><label for="box_RemoveArabian" class="subBox">Remover Tweets com Palavras em Árabe</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveHebraico" valor="remove_hebraico"><label for="box_RemoveHebraico" class="subBox">Remover Tweets com Palavras em Hebraico</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveHindi" valor="remove_hindi"><label for="box_RemoveHindi" class="subBox">Remover Tweets com Palavras em indo-arianas como Hindí, Nepalês</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveVietnamita" valor="remove_vietnamita"><label for="box_RemoveVietnamita" class="subBox">Remover Tweets com Palavras em Vietnamita</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveTailandes" valor="remove_tailandes"><label for="box_RemoveTailandes" class="subBox">Remover Tweets com Palavras em Tailândes</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveGrego" valor="remove_grego"><label for="box_RemoveGrego" class="subBox">Remover Tweets com Palavras em Grego</label></div><br>
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveAmarico" valor="remove_amarico"><label for="box_RemoveAmarico" class="subBox">Remover Tweets com Palavras em Amáricos</label></div><br>
-    </fieldset>
-        <br><br>
-        <fieldset><legend>Filtros por Palavras Banidas</legend>
+         max-width: 400px;
+         background-color: #024d77;
+         font-weight: 500;
+         color: #fff;
+         line-height: 25px;
+         inline-size: -webkit-max-content;
+         inline-size: -moz-max-content;
+         inline-size: max-content;
+         text-align: -webkit-left;
+         border-radius: 6px;
+         padding: 8px;
+         font-size: initial;
+         position: absolute;
+         z-index: 1;
+         left: 50%;
+         margin-left: -60px;
+         }
+         .popup:hover .popuptext {
+         visibility: visible;
+         }
+         .subBox{
+         font-size: medium;
+         }
+         .popup:last-child .line {
+         height: 50%;
+         }
+         .popup:last-child .line {
+         height: 50%;
+         }
+         .custom-checkbox {
+         display: inline-block;
+         position: relative;
+         margin-top: 2px;
+         }
+         .custom-checkbox input[type="checkbox"] {
+         position: absolute;
+         opacity: 0;
+         }
+         .custom-checkbox label {
+         display: -webkit-box;
+         display: -ms-flexbox;
+         display: flex;
+         cursor: pointer;
+         -webkit-box-align: center;
+             -ms-flex-align: center;
+                 align-items: center;
+         }
+         .custom-checkbox label:before {
+         content: "";
+         display: inline-block;
+         width: 16px;
+         height: 16px;
+         background-color: #ccc; /* Cor de fundo padrão */
+         border: 1px solid #999; /* Borda do checkbox */
+         border-radius: 3px; /* Borda arredondada */
+         margin-right: 10px; /* Espaço entre o checkbox e o texto */
+         }
+         .custom-checkbox input[type="checkbox"]:checked + label:before {
+         background-color: brown;
+         }
+         /* Estilo básico para o botão do menu */
+         textarea#CustomWord{
+         width: 100%;
+         font-family: sans-serif;
+         line-height: 30px;
+         font-weight: bolder;
+         background: rgb(7 29 107);
+         color: white;
+         }
+         legend{
+         font-size: x-large;
+         padding: 10px;
+         font-weight: bolder;
+         }
+         .slider-container {
+         margin: 0 auto;
+         font-size: medium;
+         }
+         .slider {
+         -webkit-appearance: none;
+         -moz-appearance: none;
+              appearance: none;
+         width: 100%;
+         height: 15px;
+         border-radius: 5px;
+         background: #145575;
+         outline: none;
+         opacity: 0.7;
+         -webkit-transition: .2s;
+         -webkit-transition: opacity .2s;
+         -o-transition: opacity .2s;
+         transition: opacity .2s;
+         }
+         .slider::-webkit-slider-thumb {
+         -webkit-appearance: none;
+         appearance: none;
+         width: 25px;
+         height: 25px;
+         border-radius: 50%;
+         background: #f8ce11;
+         cursor: pointer;
+         }
+         .slider::-moz-range-thumb {
+         width: 25px;
+         height: 25px;
+         border-radius: 50%;
+         background: #f8ce11;
+         cursor: pointer;
+         }
+         #reloadTip{
+         position: fixed;
+         bottom: 0;
+         background: darkmagenta;
+         padding: 10px;
+         margin: 0;
+         z-index: 10;
+         left: 50%;
+         bottom: 0;
+         -webkit-transform: translate(-50%);
+             -ms-transform: translate(-50%);
+                 transform: translate(-50%);
+         width: 60%;
+         font-weight:bold;
+         display: none;
+         }
+         #icont{
+         display: -webkit-box;
+         display: -ms-flexbox;
+         display: flex;
+         -webkit-box-pack: center;
+             -ms-flex-pack: center;
+                 justify-content: center;
+         -webkit-box-align: center;
+             -ms-flex-align: center;
+                 align-items: center;
+         }
+         #disc{
+         border-bottom-left-radius: 50px;
+         }
+         #pix{
+         border-top-right-radius: 50px;
+         }
+         a{
+         display: inline-block;
+         padding: 20px;
+         position: relative;
+         text-align: -webkit-center;
+         }
+         a img{
+         height: 90px;
+         -webkit-filter: drop-shadow(0px 0px 8px wheat);
+                 filter: drop-shadow(0px 0px 8px wheat);
+         }
+         #centerContent{
+         display: -webkit-box;
+         display: -ms-flexbox;
+         display: flex;
+         -webkit-box-pack: center;
+             -ms-flex-pack: center;
+                 justify-content: center;
+         }
+         #ic{
             
-            <div class="popup">
-                <div class="custom-checkbox"><input type="checkbox" id="box_ScanFullWord" valor="full_word"><label for="box_ScanFullWord" class="subBox">Aplicar Filtro Apenas em Palavras Completas</label></div>
-                <div class="popuptext">Aplica o Filtro apenas se for identificado uma Palavra Completa.</div>
-            </div><br>
-            <div class="popup">
-          <div class="custom-checkbox"><input type="checkbox" id="box_UseRegEx" valor="use_regex"><label for="box_UseRegEx" class="subBox">Filtrar usando RegEx</label></div>
-          <div class="popuptext">Melhora o Filtro deixando-o mais Agressivo aplicando o filtro dentro das palavras, mas pode afetar tweets inocentes como por Exemplo o Filtro "porn" irá ser ativado em palavras não-relacionadas como "pornélio", recomenda-se deixar desativado caso tenha problemas ou considere melhorar os filtros Manuais colocando palavras mais completas.<hr>DICA DE MESTRE: Ponto (.): Corresponde a qualquer caractere único, exceto uma nova linha. Por exemplo, /a.c/ corresponderá a "abc", "adc", "aec", etc.
-    <br>
-            Asterisco (*): O asterisco corresponde a zero ou mais ocorrências do caractere anterior. Por exemplo, /ab*c/ corresponderá a "ac", "abc", "abbc", "abbbc", etc.
-            <br> <br>
-            Interrogação (?): A interrogação torna o caractere anterior opcional, correspondendo a zero ou uma ocorrência. Por exemplo, /colou?r/ corresponderá a "color" e "colour".
-            <br> <br>
-            Mais (+): O mais corresponde a uma ou mais ocorrências do caractere anterior. Por exemplo, /go+l/ corresponderá a "gol", "gool", "gooool", etc.
-            <br> <br>
-            Parênteses (()): Os parênteses são usados para agrupar partes da expressão regular. Isso pode ser útil para aplicar quantificadores a várias partes da expressão ou para capturar partes específicas da correspondência. Por exemplo, /(abc)+/ corresponderá a "abc", "abcabc", "abcabcabc", etc.
-            <br> <br>
-            Colchetes ([]): Os colchetes definem uma classe de caracteres, correspondendo a qualquer caractere dentro dos colchetes. Por exemplo, /[aeiou]/ corresponderá a qualquer vogal. </div>
-        </div><br>
-        <div class="popup"><div class="custom-checkbox"><input type="checkbox" id="box_CustomWord" valor="PalavrasCustomizadas">
-            <label for="box_CustomWord" class="subBox">Ativar Filtro de Palavras Customizadas</label></div>
-            <div class="popuptext">Remove Tweets que contém Termos Definidos por Você, digite abaixo as palavras que quer Filtrar nos Tweets separando um Elemento por Linha. Você pode escrever oque quiser, caso queira por exemplo banir algum site basta coloca-lo com o prefixo como por exemplo Google.com/ ao invés de só Google<hr>
-            Para Banir de forma eficiente hashtags, NÃO digite a Hashtag (#), só a palavra na frente caso a Opção "Aplicar Filtros apenas em Palavras Completas" Esteja ativa.</div>
-        </div><br>
-        <div class="popup"><div class="custom-checkbox"><input type="checkbox" id="box_CensuraPalavra" valor="CensuraPalavra">
-            <label for="box_CensuraPalavra" class="subBox">Ofuscar as Palavras Encontradas ao invés de remover o tweet.</label></div>
-            <div class="popuptext">Ofusca as palavras encontradas, deixando-a ilegivel e com um fundo laranja, a palavra é revelada ao passar o mouse por cima :D.
+    max-width: 140px;
+         }
+         #notas{
+    padding: 0;
+    color: burlywood;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="icont"><img id="ic" src="icon.png"></div>
+      <br>
+      <center><div style="font-size: xx-large;" id="title">Controle de Feed para Twitter</div>
+      <br>
+      Ver.<span id="versao">0.1.2 beta</span> - <a id="notas" href="start.html" target="_blank">Notas desta Versão</a>
+      <hr>
+      <div id="reloadTip">É sempre melhor recarregar o Twitter ao mudar alguma configuração.</div>
 
-            </div></div><br><br>
-        
-        <textarea id="CustomWord" cols="30" rows="10" placeholder="escreva palavras ou frases que quer evitar aqui, separados por linha"></textarea>
-    </fieldset>
-    </div>
-  </div>
-  
-  <br><br>
-  <fieldset><legend>Personalização Visual</legend>
-
-
-    <div class="popup">
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveOptionsBox" valor="Header_Menu">
-     <label for="box_RemoveOptionsBox" class="subBox">Menu do Twitter na Horizontal</label></div>
-     <div class="popuptext">Faz com que o Menu do Twitter apareça no Topo da Tela na Horizontal</div>
-     </div><br>
-    </fieldset>
-   <br><br>
-<fieldset><legend>Ferramentas Extras</legend>
-    <div class="popup">
-        <div class="custom-checkbox"><input type="checkbox" id="box_RemoveBigLetters" valor="remove_BigLetter">
-            <label for="box_RemoveBigLetters" class="subBox">Remover Tweets com ＬＥＴＲＡＳ ＧＩＧＡＮＴＥＳ</label></div><br>    
-   
-     <div class="popuptext">Remove Tweets que contenham esses tipos de Letras, geralmente usado por BOTS</div>
-     </div><br>
-   
-     <div class="popup">
-        <div class="custom-checkbox"><input type="checkbox" id="box_NoEmotes" valor="Remover_Emotes">
-     <label for="box_NoEmotes" class="subBox">Remover Tweets Vazios (que contem somente Emotes)</label></div>
-     <div class="popuptext">Remove os Tweets que contenham Apenas Emotes no conteúdo. Isso ignora tweets que contenham apenas emotes junto com alguma imagem/video no mesmo tweet.<br><img src="IMAGE/emojis.png"></div>
-     </div><br>
-
-        <div class="popup">
+      
+      <select id="language-selector" style="
+      width: 220px;
+      height: 40px;
+      font-size: large;
+      background: oldlace;
+      border: 0;
+      border-radius: 10px;
+      text-align-last: center;
+  ">
+         <option value="pt_BR">Português - Brasil</option>
+        <option value="en">English</option>
+      </select></center>
+      <br>
+      <fieldset>
+         <legend id="filterConfig">Configurações dos Filtros</legend>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_ScanAllTweet" valor="todo_tweet"><label for="box_ScanAllTweet" class="subBox">Aplicar Filtros no Nome de Usuário</label></div>
+            <div class="popuptext box_ScanAllTweet">Aplica os Filtros no Conteúdo do Tweet e no Nome de Usuário que Postou. Desativar irá aplicar os filtros APENAS no Conteúdo do Tweet</div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_ScanUrlCards" valor="tweet_urlCards"><label for="box_ScanUrlCards" class="subBox">Aplicar Filtros nas Previsões de URL</label></div>
+            <div class="popuptext"><div class="box_ScanUrlCards">Aplica os Filtros nos Cards de Previsões de URLs (quando você digita um site e aparece um "Resumo" dele). Útil quando o Card possúi alguma Informação que gostaria de bloquear.</div><br><img src="IMAGE/videoPreview.png"/></div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_ScanTrends" valor="scan_trends"><label for="box_ScanTrends" class="subBox">Aplicar Filtros nas Trends (Assuntos do Momento)</label></div>
+            <div class="popuptext"><div class="box_ScanTrends">Aplica os Filtros nas Trends do Twitter, caso queira ocultar Assuntos do Momento relacionados á Política, basta inserir a Palavra "Política" no filtro de Palavras Personalizadas</div><br><img src="IMAGE/trendings.png"></div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_FadeOutTweet" valor="FadeOut_Tweet">
+               <label for="box_FadeOutTweet" class="subBox">Escurecer Tweet ao Invés de Remover</label>
+            </div>
+            <div class="popuptext box_FadeOutTweet">Escurece e Muda para um Fundo Laranja, os Tweets afetados por algum filtro ao invés de remove-lo. (Útil para testar os filtros)</div>
+         </div>
+         <br>
+      </fieldset>
+      <br>
+      <br>
+      <fieldset>
+         <legend id="tweets_languages">
+           
+               Tweets em Outros Idiomas
+               
+         </legend>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveAsian" valor="remove_asiatico"><label for="box_RemoveAsian" class="subBox">Remover Tweets com Palavras em Chinês e Japonês</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveKorean" valor="remove_coreano"><label for="box_RemoveKorean" class="subBox">Remover Tweets com Palavras em Coreano</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveRussian" valor="remove_russo"><label for="box_RemoveRussian" class="subBox">Remover Tweets com Palavras em Russo</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveArabian" valor="remove_arabe"><label for="box_RemoveArabian" class="subBox">Remover Tweets com Palavras em Árabe</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveHebraico" valor="remove_hebraico"><label for="box_RemoveHebraico" class="subBox">Remover Tweets com Palavras em Hebraico</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveHindi" valor="remove_hindi"><label for="box_RemoveHindi" class="subBox">Remover Tweets com Palavras em indo-arianas como Hindí, Nepalês e Tâmil</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveVietnamita" valor="remove_vietnamita"><label for="box_RemoveVietnamita" class="subBox">Remover Tweets com Palavras em Vietnamita</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveTailandes" valor="remove_tailandes"><label for="box_RemoveTailandes" class="subBox">Remover Tweets com Palavras em Tailândes</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveGrego" valor="remove_grego"><label for="box_RemoveGrego" class="subBox">Remover Tweets com Palavras em Grego</label></div>
+         <br>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveAmarico" valor="remove_amarico"><label for="box_RemoveAmarico" class="subBox">Remover Tweets com Palavras em Amáricos</label></div>
+         <br>
+      </fieldset>
+      <br><br>
+      <fieldset>
+         <legend id="banned_words">Filtros por Palavras Banidas</legend>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_ScanFullWord" valor="full_word"><label for="box_ScanFullWord" class="subBox">Aplicar Filtro Apenas em Palavras Completas</label></div>
+            <div class="popuptext box_ScanFullWord">Aplica o Filtro apenas se for identificado uma Palavra Completa.</div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_UseRegEx" valor="use_regex"><label for="box_UseRegEx" class="subBox">Filtrar usando RegEx</label></div>
+            <div class="popuptext box_UseRegEx">
+               Melhora o Filtro deixando-o mais Agressivo aplicando o filtro dentro das palavras, mas pode afetar tweets inocentes como por Exemplo o Filtro "porn" irá ser ativado em palavras não-relacionadas como "pornélio", recomenda-se deixar desativado caso tenha problemas ou considere melhorar os filtros Manuais colocando palavras mais completas.
+              </div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_CustomWord" valor="PalavrasCustomizadas">
+               <label for="box_CustomWord" class="subBox">Ativar Filtro de Palavras Customizadas</label>
+            </div>
+            <div class="popuptext box_CustomWord">
+               Remove Tweets que contém Termos Definidos por Você, digite abaixo as palavras que quer Filtrar nos Tweets separando um Elemento por Linha. Você pode escrever oque quiser, caso queira por exemplo banir algum site basta coloca-lo com o prefixo como por exemplo Google.com/ ao invés de só Google
+              </div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_CensuraPalavra" valor="CensuraPalavra">
+               <label for="box_CensuraPalavra" class="subBox">Ofuscar as Palavras Encontradas ao invés de remover o tweet.</label>
+            </div>
+            <div class="popuptext box_CensuraPalavra">Ofusca as palavras encontradas, deixando-a ilegivel e com um fundo laranja, a palavra é revelada ao passar o mouse por cima :D.
+            </div>
+         </div>
+         <br><br>
+         <textarea id="CustomWord" cols="30" rows="10" placeholder="escreva palavras ou frases que quer evitar aqui, separados por linha"></textarea>
+      </fieldset>
+      <br><br>
+      <fieldset>
+         <legend id="visual_filters">Personalização Visual</legend>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_RemoveOptionsBox" valor="Header_Menu">
+               <label for="box_RemoveOptionsBox" class="subBox">Menu do Twitter na Horizontal</label>
+            </div>
+            <div class="popuptext box_RemoveOptionsBox">Faz com que o Menu do Twitter apareça no Topo da Tela na Horizontal</div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_RemoveComplementary" valor="RemoveComplementary"">
+               <label for="box_RemoveComplementary" class="subBox">Remover Conteúdo Lateral</label>
+            </div>
+            <div class="popuptext box_RemoveComplementary">Remove conteúdo na direita sobre pessoas que: "Talvez Você curta" , "Pessoas Relevantes" e "Quem Seguir"</div>
+         </div>
+      </fieldset>
+      <br><br>
+      <fieldset>
+         <legend id="extra_tools">Ferramentas Extras</legend>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_RemoveBigLetters" valor="remove_BigLetter">
+               <label for="box_RemoveBigLetters" class="subBox">Remover Tweets com ＬＥＴＲＡＳ ＧＩＧＡＮＴＥＳ</label>
+            </div>
+            <br>    
+            <div class="popuptext box_RemoveBigLetters">Remove Tweets que contenham esses tipos de Letras, geralmente usado por BOTS</div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_NoEmotes" valor="Remover_Emotes">
+               <label for="box_NoEmotes" class="subBox">Remover Tweets Vazios (que contem somente Emotes)</label>
+            </div>
+            <div class="popuptext "><div class="box_NoEmotes">Remove os Tweets que contenham Apenas Emotes no conteúdo. Isso ignora tweets que contenham apenas emotes junto com alguma imagem/video no mesmo tweet.</div><br><img src="IMAGE/emojis.png"></div>
+         </div>
+         <br>
+         <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_NoPools" valor="Remover_Enquetes">
-         <label for="box_NoPools" class="subBox">Remover Tweets que contenham Votações</label></div>
-         <div class="popuptext">Remove Automáticamente os Tweets que contenham Votações, como "Qual seu Time Favorito?" ou "Qual cor você prefere?"...</div>
-         </div><br>
-
+               <label for="box_NoPools" class="subBox">Remover Tweets que contenham Votações</label>
+            </div>
+            <div class="popuptext box_NoPools">Remove Automáticamente os Tweets que contenham Votações, como "Qual seu Time Favorito?" ou "Qual cor você prefere?"...</div>
+         </div>
+         <br>
          <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_RemoveSelfRetweet" valor="ANTI_SELF">
-         <label for="box_RemoveSelfRetweet" class="subBox">Remover Tweets que contenham Retweets próprios</label></div>
-         <div class="popuptext">Remove Automáticamente tweets que contenham apenas um Retweet de sí próprio (como por exemplo alguém chega na sua postagem e posta um OUTRO tweet dela mesma).<br><img src="IMAGE/selfTwet.png"></div>
-         </div><br>
-         
-
+               <label for="box_RemoveSelfRetweet" class="subBox">Remover Tweets que contenham Retweets próprios</label>
+            </div>
+            <div class="popuptext "><div class="box_RemoveSelfRetweet">Remove Automáticamente tweets que contenham apenas um Retweet de sí próprio (como por exemplo alguém chega na sua postagem e posta um OUTRO tweet dela mesma).</div><br><img src="IMAGE/selfTwet.png"></div>
+         </div>
+         <br>
          <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_RemoveFakeVideos" valor="FakeVideos">
-         <label for="box_RemoveFakeVideos" class="subBox">Remover Tweets com Vídeos Falsos</label></div>
-         <div class="popuptext">Remove Tweets que contenham uma Imagem carregada de um Link (quando algum bot posta um Link que mostra uma Imagem com um "PLAY" nela, e ao clicar é mandado para o site).<br><img src="IMAGE/FakeVideo.png"/></div>
-         </div><br>
-         
+               <label for="box_RemoveFakeVideos" class="subBox">Remover Tweets com Vídeos Falsos</label>
+            </div>
+            <div class="popuptext "><div class="box_RemoveFakeVideos">Remove Tweets que contenham uma Imagem carregada de um Link (quando algum bot posta um Link que mostra uma Imagem com um "PLAY" nela, e ao clicar é mandado para o site).</div><br><img src="IMAGE/FakeVideo.png"/></div>
+         </div>
+         <br>
          <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_RemoveAutomated" valor="RemoveAutomated">
-         <label for="box_RemoveAutomated" class="subBox">Remover Tweets Automátizados</label></div>
-         <div class="popuptext">Remove Tweets Automátizados (Tweets que contém o parâmetro "Automático" inserido pelo Twitter para identificar bots comuns)<br><img src="IMAGE/automated.png"/></div>
+               <label for="box_RemoveAutomated" class="subBox">Remover Tweets Automátizados</label>
+            </div>
+            <div class="popuptext"><div class="box_RemoveAutomated">Remove Tweets Automátizados (Tweets que contém o parâmetro "Automático" inserido pelo Twitter para identificar bots comuns)</div><br><img src="IMAGE/automated.png"/></div>
          </div>
          <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_RemoveSponsored" valor="RemoveSponsored">
-         <label for="box_RemoveSponsored" class="subBox">Remover Tweets Patrocinados (Anúncios)</label></div>
-         <div class="popuptext">Ativa o Recurso de Detecção e Remove os tweets que sejam Patrocinados automáticamente. Não é tão eficiente quanto um bom bloqueador de anúncios, já que apenas remove os elementos visiveis.</div>
+               <label for="box_RemoveSponsored" class="subBox">Remover Tweets Patrocinados (Anúncios)</label>
+            </div>
+            <div class="popuptext box_RemoveSponsored">Ativa o Recurso de Detecção e Remove os tweets que sejam Patrocinados automáticamente. Não é tão eficiente quanto um bom bloqueador de anúncios, já que apenas remove os elementos visiveis.</div>
          </div>
          <br>
-   
          <div class="popup">
-                <div class="custom-checkbox"><input type="checkbox" id="box_RemoveNoPics" valor="NoPics">
-             <label for="box_RemoveNoPics" class="subBox">Remover Tweets de Usuários Sem Foto</label></div>
-             <div class="popuptext">Remove Tweets de Pessoas que estão usando a Foto Padrão do Twitter (Sem Foto).<br><img src="IMAGE/NoPhotoMan.png"></div>
-             </div><br>
-
+            <div class="custom-checkbox"><input type="checkbox" id="box_RemoveNoPics" valor="NoPics">
+               <label for="box_RemoveNoPics" class="subBox">Remover Tweets de Usuários Sem Foto</label>
+            </div>
+            <div class="popuptext"><div class="box_RemoveNoPics">Remove Tweets de Pessoas que estão usando a Foto Padrão do Twitter (Sem Foto).</div><br><img src="IMAGE/NoPhotoMan.png"></div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_SearchFix" valor="SearchFix">
+               <label for="box_SearchFix" class="subBox">Remover Conteúdo Indesejado das Pesquisas</label>
+            </div>
+            <div class="popuptext box_SearchFix">Remove Tweets na Página de Pesquisa caso o tweet não contenha a palavra especificada no conteúdo de texto. Somente tweets em que o texto contenha oque você pesquisou irá permanecer e o restante será removido.</div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_NotificationSearch" valor="NotificationSearch">
+               <label for="box_NotificationSearch" class="subBox">Habilitar Atalho de Pesquisa nas Notificações</label>
+            </div>
+            <div class="popuptext box_NotificationSearch">Ativa o Recurso de pesquisa nas notificações usando Ctrl+F. Pode pesquisar por usuário (ou @Usuário) ou tipo de notificação como Retweet, Curtida ou Comentário.</div>
+         </div>
+         <br>
          <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_ZoomImages" valor="ZoomImages">
-         <label for="box_ZoomImages" class="subBox">Habilitar Previsão e Zoom das Imagens dos Tweets</label></div>
-         <div class="popuptext">Ativa o Recurso de Previsão da Imagem Completa e Função de Zoom nas Imagens dos Tweets, basta passar o mouse por cima de alguma imagem para ve-la completamente, e usar o Scroll (Ctrl+Scroll Up ou Down) do Mouse para ampliar o zoom dela! (Use os cliques do mouse para ocultar a previsão da Imagem rapidamente e Ctrl + S para salvar a imagem original).<br><img src="IMAGE/PreviewImages.png"></div>
+               <label for="box_ZoomImages" class="subBox">Habilitar Previsão e Zoom das Imagens dos Tweets</label>
+            </div>
+            <div class="popuptext "><div class="box_ZoomImages">Ativa o Recurso de Previsão da Imagem Completa e Função de Zoom nas Imagens dos Tweets, basta passar o mouse por cima de alguma imagem para ve-la completamente, e usar o Scroll (Ctrl+Scroll Up ou Down) do Mouse para ampliar o zoom dela! (Use os cliques do mouse para ocultar a previsão da Imagem rapidamente e Ctrl + S para salvar a imagem original).</div><br><img src="IMAGE/PreviewImages.png"></div>
          </div>
          <br>
-         
-
-
          <div class="popup">
-            <div class="custom-checkbox"><input type="checkbox" id="box_Notifications" valor="ExtensionAlerts">
-         <label for="box_Notifications" class="subBox">Habilitar Notificações de Depuração</label></div>
-         <div class="popuptext">Ativa as Notificações da Extensão em retangulos azuis, que avisa quando uma ação é tomada em algum Tweet. Grande Poluidor Visual da Tela!!</div>
-         </div><br>
-         <div class="popup"><div class="custom-checkbox"><input type="checkbox" id="box_BlockPeople" valor="BloquearOnFind">
-             <label for="box_BlockPeople" class="subBox">Bloquear Usuário no Twitter ao Detectar em um Filtro</label></div>
-             <div class="popuptext">BLOQUEIA o usuário no twitter automáticamente, quando algum Filtro Específico é aplicado no tweet, potencialmente perigoso se o filtro não for usado corretamente, ou se muitos usuários forem banidos em menos de 10 minutos<br><br><ul>
-                Os filtros ativos para esta função são:<hr>
-                <li>Filtro de Palavras Banidas Customizadas</li>
-                <li>Filtro de Tweets com LETRAS GIGANTES</li>
-                <li>Filtro de Tweets Automátizados</li>
-            </ul>
-             </div></div><br>
-           
-
-             <br>
-        </fieldset><br><br>
-<fieldset><legend><div class="popup">Filtro de Tweets Semelhantes (Anti-Spam)<div class="popuptext">Remove Tweets caso outro tweet seja Muito Parecido com ele usando Coeficiente de Similaridade de Jaccard (Isso remove TODOS os tweets parecidos).<br><img src="IMAGE/Semelhantes.png"/></div></div></legend>
-         
-            <div class="custom-checkbox"><input type="checkbox" id="box_RemoveCopyTweets" valor="CopyTweets">
-         <label for="box_RemoveCopyTweets" class="subBox">Ativar Filtro</label></div>
+            <div class="custom-checkbox"><input type="checkbox" id="box_BlockPeople" valor="BloquearOnFind">
+               <label for="box_BlockPeople" class="subBox">Bloquear Usuário no Twitter ao Detectar em um Filtro</label>
+            </div>
+            <div class="popuptext box_BlockPeople">
+               BLOQUEIA o usuário no twitter automáticamente, quando algum Filtro Específico é aplicado no tweet, potencialmente perigoso se o filtro não for usado corretamente, ou se muitos usuários forem banidos em menos de 10 minutos<br><br>
+               <ul>
+                  Os filtros ativos para esta função são:
+                  <hr>
+                  <li>Filtro de Palavras Banidas Customizadas</li>
+                  <li>Filtro de Tweets com LETRAS GIGANTES</li>
+                  <li>Filtro de Tweets Automátizados</li>
+               </ul>
+            </div>
+         </div>
+         <br>
+         <br>
+      </fieldset>
+      <br><br>
+      <fieldset>
+         <legend id="spam_filter">
+               Filtro de Tweets Semelhantes (Anti-Spam)
+               
+         </legend>
+         <div class="custom-checkbox"><input type="checkbox" id="box_RemoveCopyTweets" valor="CopyTweets">
+            <label for="box_RemoveCopyTweets" class="subBox">Ativar Filtro</label>
+         </div>
          <br>
          <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_RemoveCopyTweets_Links" valor="CopyTweets_RemoveLinks">
-         <label for="box_RemoveCopyTweets_Links" class="subBox">Ignorar os Links, Menções e Multiplos Espaçamentos no Conteúdo</label></div>
-         <div class="popuptext">Ignora todos os Links, Menções e Muitos Espaçamentos dos Conteúdos Filtrados (Aumenta a chance de Tweets Spam serem detectados, já que bots usam o mesmo texto, mas com links, menções e espaçamentos Diferentes)</div>
-         </div><br><br>
+               <label for="box_RemoveCopyTweets_Links" class="subBox">Ignorar os Links, Menções e Multiplos Espaçamentos no Conteúdo</label>
+            </div>
+            <div class="popuptext box_RemoveCopyTweets_Links">Ignora todos os Links, Menções e Muitos Espaçamentos dos Conteúdos Filtrados (Aumenta a chance de Tweets Spam serem detectados, já que bots usam o mesmo texto, mas com links, menções e espaçamentos Diferentes)</div>
+         </div>
+         <br><br>
          <div class="slider-container">
             <div class="popup">
-            <span id="rangeValue">Medida de Correspondência para Identificar Tweets: </span><br>
-            <input type="range" min="0" max="100" value="80" class="slider" id="ParecidagemRange">
-            <div class="popuptext">Medidor para Definir o Quão Parecido os Tweets devem ser para serem considerados Parecidos ou Iguais, um valor Muito Baixo (Abaixo de 40%) tem grandes chances de confundir tweets que contenham simplesmente uma palavra ou duas iguais. Use com Cuidado.</div>
-        </div></div>
-        </fieldset><br><br>
-        
-        <fieldset><legend><div class="popup">Controles de Mídia<div class="popuptext">Ativa Funções Relacionadas á Videos, GIFS e Imagens nos Tweets :D</div></div></legend>
-         
-
-            <div class="popup">
-                <div class="custom-checkbox"><input type="checkbox" id="box_PauseVideos" valor="VIDEO_AUTO_PAUSE">
-             <label for="box_PauseVideos" class="subBox">Pausar Vídeos e Gifs ao Carregar e Habilitar o Controle via Teclado</label></div>
-             <div class="popuptext">Pausa Vídeos e Gifs Automáticamente (Os vídeos e gifs são reproduzidos ao passar o mouse por cima deles! Você também pode usar os controles de teclado como Setas para cima, baixo, esquerda e direita para controlar o vídeo e volume, e a tecla Espaço para pausar/reproduzir.)</div>
-             </div> <br> 
-              <div class="popup">
-                <div class="custom-checkbox"><input type="checkbox" id="box_AutoYoutube" valor="AutoYoutube">
-             <label for="box_AutoYoutube" class="subBox">Habilitar Reprodução Automática de Vídeos do Youtube</label></div>
-             <div class="popuptext">Ativa o Recurso de Reprodução Automática de vídeos do Youtube ao carregar (potencialmente problemático, vídeos do youtube embutidos consomem MUITA CPU e memória RAM).<br><img src="IMAGE/youtubeVideos.png"></div>
-             </div><br>
-            
+               <span id="rangeValue">Medida de Correspondência para Identificar Tweets: 80%</span><br>
+               <input type="range" min="0" max="100" value="80" class="slider" id="ParecidagemRange">
+               <div class="popuptext ParecidagemRange">Medidor para Definir o Quão Parecido os Tweets devem ser para serem considerados Parecidos ou Iguais, um valor Muito Baixo (Abaixo de 40%) tem grandes chances de confundir tweets que contenham simplesmente uma palavra ou duas iguais. Use com Cuidado.</div>
+            </div>
+         </div>
+      </fieldset>
+      <br><br>
+      <fieldset>
+         <legend id="media_control">
+               Controles de Mídia
+              
+         </legend>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_PauseVideos" valor="VIDEO_AUTO_PAUSE">
+               <label for="box_PauseVideos" class="subBox">Pausar Vídeos e Gifs ao Carregar e Habilitar o Controle via Teclado</label>
+            </div>
+            <div class="popuptext box_PauseVideos">Pausa Vídeos e Gifs Automáticamente (Os vídeos e gifs são reproduzidos ao passar o mouse por cima deles! Você também pode usar os controles de teclado como Setas para cima, baixo, esquerda e direita para controlar o vídeo e volume, e a tecla Espaço para pausar/reproduzir.)</div>
+         </div>
+         <br> 
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_AutoYoutube" valor="AutoYoutube">
+               <label for="box_AutoYoutube" class="subBox">Habilitar Reprodução Automática de Vídeos do Youtube</label>
+            </div>
+            <div class="popuptext"><div class="box_AutoYoutube">Ativa o Recurso de Reprodução Automática de vídeos do Youtube ao carregar (potencialmente problemático, vídeos do youtube embutidos consomem MUITA CPU e memória RAM além de que se vídeos forem carregados com muita frequência, o twitter irá começar a abrir os vídeos em uma nova aba).</div><br><img src="IMAGE/youtubeVideos.png"></div>
+         </div>
+         <br>
          <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_Uncensure" valor="ANTI_SPOILER">
-         <label for="box_Uncensure" class="subBox">Revelar Vídeos e Imagens Censurados pelo Twitter</label></div>
-         <div class="popuptext">Remove Automáticamente a Censura de Vídeos e Imagens assim que elas carregam.</div>
-         </div><br>
-
+               <label for="box_Uncensure" class="subBox">Revelar Vídeos e Imagens Censurados pelo Twitter</label>
+            </div>
+            <div class="popuptext box_Uncensure">Remove Automáticamente a Censura de Vídeos e Imagens assim que elas carregam.</div>
+         </div>
+         <br>
          <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_CensureAll" valor="CENSURAR_TUDO">
-         <label for="box_CensureAll" class="subBox">Censurar Todas as Mídias dos Tweets</label></div>
-         <div class="popuptext">Censura Todas as Mídias (Imagens e Vídeos) dos Tweets e Remove a Censura ao Passar o mouse.</div>
+               <label for="box_CensureAll" class="subBox">Censurar Todas as Mídias dos Tweets</label>
+            </div>
+            <div class="popuptext box_CensureAll">Censura Todas as Mídias (Imagens e Vídeos) dos Tweets e Remove a Censura ao Passar o mouse.</div>
          </div>
-
-        </fieldset>
-        <br><br>
-        <fieldset><legend>Tweets com Links</legend>
-            <div class="popup">
-                <div class="custom-checkbox"><input type="checkbox" id="box_RemoveLink" valor="Remover_Links">
-                    <label for="box_RemoveLink" class="subBox">Remover Tweets que contenham Links para sites Externos</label></div>
-            
-               <div class="popuptext">Remove Automáticamente os Tweets que contenham Links para sites Externos...</div>
-               </div> <br>
-                
-               <div class="popup">
-                <div class="custom-checkbox"><input type="checkbox" id="box_RemoveLinkOnly" valor="onlyLink">
-                    <label for="box_RemoveLinkOnly" class="subBox">Remover Tweets que contenham APENAS UM LINK</label></div>
-            
-                <div class="popuptext">Esta opção é mais eficiente, já que geralmente bots postam um unico tweet com um link</div>
-            </div> <br>
-                
-            <div class="popup">
-             <div class="custom-checkbox"><input type="checkbox" id="box_RemoveRedirectLinks" valor="redirectLink">
-                 <label for="box_RemoveRedirectLinks" class="subBox">Remover Tweets com Links que Contenham Redirecionamento (Não implementado ainda)</label></div>
-         
-             <div class="popuptext">Esta opção é mais eficiente, já que geralmente bots postam um unico tweet com um link</div>
-         </div> <br>
-        </fieldset><br><br>
-
-        
-        <fieldset><legend>Ações Rápidas nos Tweets</legend>
-        
-                <div class="popup">
-                         <div class="custom-checkbox"><input type="checkbox" id="box_reportExtension" valor="reportExtension">
-                             <label for="box_reportExtension" class="subBox">Mostrar Botão de Reportar Tweet para a Extensão (ainda não implementado)</label></div>
-                     
-                         <div class="popuptext">Mostra a Opção de Reportar Tweets para o Algorítimo da Extensão, que sincroniza com os outros usuários para ocultar o mesmo tweet para todos.<br><img src="IMAGE/FastButtons.png"/></div>
-                     </div>
-                     <br>
-                     <div class="popup">
-                              <div class="custom-checkbox"><input type="checkbox" id="box_fastBlock" valor="fastBlock">
-                                  <label for="box_fastBlock" class="subBox">Mostrar Botão de Bloquear Rápidamente</label></div>
-                          
-                              <div class="popuptext">Mostra a Opção de Bloquear o Usuário no Twitter Rápidamente.<br><img src="IMAGE/FastButtons.png"/></div>
-                          </div>
-                          <br>
-                          <div class="popup">
-                                   <div class="custom-checkbox"><input type="checkbox" id="box_verMenos" valor="verMenos">
-                                       <label for="box_verMenos" class="subBox">Mostrar Botão de 'Ver Menos deste Usuário' Rápidamente</label></div>
-                               
-                                   <div class="popuptext">Mostra a Opção de 'Ver Menos deste Usuário' Rápidamente. Só funciona na Página Principal, na aba "Para Você".<br><img src="IMAGE/FastButtons.png"/></div>
-                               </div>
-                               <br>
-    <div class="popup">
-   <div class="custom-checkbox"><input type="checkbox" id="box_fastMute" valor="fastMute">
-   <label for="box_fastMute" class="subBox">Mostrar Botão de Silenciar Usuário Rápidamente</label></div>
-                                    
-    <div class="popuptext">Mostra a Opção de Silenciar Usuário Rápidamente.<br><img src="IMAGE/FastButtons.png"/></div>
-     </div>
-        
-        
-        </fieldset>
-</body>
-<script src="twitter_settingsScript.js" defer></script>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_KeyNavi" valor="KEYBOARD_NAVI">
+               <label for="box_KeyNavi" class="subBox">Ativar Navegação pelo Teclado</label>
+            </div> 
+            <div class="popuptext box_KeyNavi">Navega entre os tweets usando apenas as teclas WASD (e setas) do teclado, use W e S para navegar para cima e baixo, D para entrar no tweet selecionado e A para voltar sem usar o mouse.</div>
+         </div>
+      </fieldset>
+      <br><br>
+      <fieldset>
+         <legend id="tweet_links">Tweets com Links</legend>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_RemoveLink" valor="Remover_Links">
+               <label for="box_RemoveLink" class="subBox">Remover Tweets que contenham Links para sites Externos</label>
+            </div>
+            <div class="popuptext box_RemoveLink">Remove Automáticamente os Tweets que contenham Links para sites Externos...</div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_RemoveLinkOnly" valor="onlyLink">
+               <label for="box_RemoveLinkOnly" class="subBox">Remover Tweets que contenham APENAS UM LINK</label>
+            </div>
+            <div class="popuptext box_RemoveLinkOnly">Filtra e Remove apenas os Tweets que contenham Links (sem imagens, vídeos ou texto)</div>
+         </div>
+         <br>
+      </fieldset>
+      <br><br>
+      <fieldset>
+         <legend id="fast_actions">Ações Rápidas nos Tweets</legend>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_reportExtension" valor="reportExtension">
+               <label for="box_reportExtension" class="subBox">Mostrar Botão de Reportar Tweet para a Extensão (ainda não implementado)</label>
+            </div>
+            <div class="popuptext"><div class="box_reportExtension">Mostra a Opção de Reportar Tweets para o Algorítimo da Extensão, que sincroniza com os outros usuários para ocultar o mesmo tweet para todos.</div><br><img src="IMAGE/FastButtons.png"/></div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_fastBlock" valor="fastBlock">
+               <label for="box_fastBlock" class="subBox">Mostrar Botão de Bloquear Rápidamente</label>
+            </div>
+            <div class="popuptext"><div class="box_fastBlock">Mostra a Opção de Bloquear o Usuário no Twitter Rápidamente.</div><br><img src="IMAGE/FastButtons.png"/></div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_verMenos" valor="verMenos">
+               <label for="box_verMenos" class="subBox">Mostrar Botão de 'Ver Menos deste Usuário' Rápidamente</label>
+            </div>
+            <div class="popuptext"><div class="box_verMenos">Mostra a Opção de 'Ver Menos deste Usuário' Rápidamente. Só funciona na Página Principal, na aba "Para Você".</div><br><img src="IMAGE/FastButtons.png"/></div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_fastMute" valor="fastMute">
+               <label for="box_fastMute" class="subBox">Mostrar Botão de Silenciar Usuário Rápidamente</label>
+            </div>
+            <div class="popuptext"><div class="box_fastMute">Mostra a Opção de Silenciar Usuário Rápidamente.</div><br><img src="IMAGE/FastButtons.png"/></div>
+         </div>
+         <br>
+         <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_fastQuotes" valor="viewQuotes">
+               <label for="box_fastQuotes" class="subBox">Mostrar Botão de Ver Retweets Rápidamente</label>
+            </div>
+            <div class="popuptext"><div class="box_fastQuotes">Mostra a Opção de Ver os Retweets (Quotes) Rápidamente.</div><br><img src="IMAGE/FastButtons.png"/></div>
+         </div>
+      </fieldset>
+      <br><br>
+      <div id="centerContent">
+         <a href="https://discord.gg/a8rYfPFT6d" target="blank_"><img src="img/discord.png"></a>
+         <a href="https://twitter.com/CaiotaGames" target="blank_"> <img src="img/Twitter.png"></a>
+         <a href="https://livepix.gg/caiota" target="blank_"><img src="img/pix.png"></a>
+      </div>
+   </body>
+   <script src="twitter_settingsScript.js" defer></script>
 </html>
