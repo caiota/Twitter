@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
   "description": "__MSG_description__",
-  "version": "1.15.1",
+  "version": "1.15.65",
   "default_locale": "pt_BR",
   "permissions": ["tabs","storage","activeTab","contextMenus"],
   "content_scripts": [

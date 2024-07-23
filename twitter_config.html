@@ -182,6 +182,7 @@ body {
          padding: 20px;
          position: relative;
          text-align: -webkit-center;
+         
          }
          a img{
          height: 90px;
@@ -204,6 +205,15 @@ body {
     padding: 0;
     color: burlywood;
          }
+         #notesUrl{
+            
+    text-decoration: none;
+    color: wheat;
+         }
+         #notesUrl img{
+            width:34px;
+            height:34px;
+         }
       </style>
    </head>
    <body>
@@ -211,7 +221,9 @@ body {
       <br>
       <center><div style="font-size: xx-large;" id="title">Controle de Feed para Twitter</div>
       <br>
-      Ver.<span id="versao">0.1.2 beta</span> - <a id="notas" href="start.html" target="_blank">Notas desta Versão</a>
+      Ver.<span id="versao">0.1.2 beta</span> - <a id="notas" href="start.html" target="_blank">Notas desta Versão</a><br><br>
+      <a href="#" id="notesUrl" target="_blank"><span id="LeaveNotesPls">o.O its not loading?</span>
+         <br><br><img src="img/star.webp"><img src="img/star.webp"><img src="img/star.webp"><img src="img/star.webp"><img src="img/star.webp"></a>
       <hr>
       <div id="reloadTip">É sempre melhor recarregar o Twitter ao mudar alguma configuração.</div>
 
@@ -401,8 +413,15 @@ body {
          </div>
          <br>
          <div class="popup">
+            <div class="custom-checkbox"><input type="checkbox" id="box_NsfwEmotes" valor="NsfwEmotes">
+               <label for="box_NsfwEmotes" class="subBox">Remover Tweets com Emotes NSFW</label>
+            </div>
+            <div class="popuptext box_NsfwEmotes">Remove automáticamente tweets com emotes NSFW como icone de +18, pimenta entre outros usados por divulgadores e spam de conteúdo NSFW.</div>
+         </div>
+         <br>
+         <div class="popup">
             <div class="custom-checkbox"><input type="checkbox" id="box_NotificationSearch" valor="NotificationSearch">
-               <label for="box_NotificationSearch" class="subBox">Habilitar Atalho de Pesquisa nas Notificações</label>
+               <label for="box_NotificationSearch" class="subBox">Habilitar Caixa de Pesquisa nas Notificações</label>
             </div>
             <div class="popuptext box_NotificationSearch">Ativa o Recurso de pesquisa nas notificações usando Ctrl+F. Pode pesquisar por usuário (ou @Usuário) ou tipo de notificação como Retweet, Curtida ou Comentário.</div>
          </div>

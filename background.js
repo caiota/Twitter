@@ -28,6 +28,7 @@ const FUNCTION_SETTINGS_PADRAO = {
   FAKE_VIDEO_BAIT: false,
   NOTIFICATION_SEARCH:true,
   Tweet_Scan_Palavras: {
+    BanEmotes:true,
     RemoveAutomated: true,
     NaoRemover_Customizadas: false,
     Block_User: false,
@@ -71,7 +72,7 @@ const FUNCTION_SETTINGS_PADRAO = {
 };
 
 let SCRIPT_READY = false;
-
+let BROWSER=getBrowser();
 chrome.tabs.onCreated.addListener(tab => {
   if (SCRIPT_READY && tab.status === "complete") {
     startScript(tab.id);
@@ -112,6 +113,8 @@ chrome.runtime.onConnect.addListener(porte => {
     switch (message.action) {
       case "SCRIPT_POPUP_READY":
         port.postMessage({ action: "SCRIPT_POPUP_READY" });
+        
+port.postMessage({ action: 'NAVIGATOR_BYINFO', message:BROWSER });
         break;
       case "save_customWords":
         SALVAR_PALAVRAS_PREDEFINIDAS(message.message);
@@ -148,6 +151,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       case "async_enabledFunctions":
         CARREGAR_FUNCOES(message.tipo);
         break;
+        case "block":
+
+          sendResponse({ "bloqueando":message.user });
+          chrome.tabs.create({ url: "https://x.com/"+message.user+"?block=true" });
+          break;
     }
     return true;
   } catch (e) {
@@ -249,3 +257,70 @@ chrome.runtime.onInstalled.addListener(details => {
 
   chrome.tabs.create({ url: "wc/"+chrome.i18n.getMessage("lang")+"/start.html" });
 });
+
+
+function getBrowser() {
+  try{
+  const userAgent = navigator.userAgent;
+  const plugins = navigator.plugins;
+  if(navigator.userAgentData){
+  var UserAgentDataBase = navigator.userAgentData.brands;
+  }
+  let browserName = "Unknown";
+
+  // Função para verificar se um plugin com um nome específico existe
+  function hasPlugin(name) {
+    if(plugins){
+    for (let i = 0; i < plugins.length; i++) {
+      if (plugins[i].name.includes(name)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  return false;
+  } 
+  function hasUserAgentData(name) {
+    if(UserAgentDataBase){
+    for (let i = 0; i < UserAgentDataBase.length; i++) {
+      if (UserAgentDataBase[i].brand.includes(name)) {
+        return true;
+      }
+    }
+    return false;
+  }
+  return false;
+  }
+
+  if (userAgent.includes("OPR") || userAgent.includes("Opera")) {
+    browserName = "Opera";
+  } else if (userAgent.includes("Edg")) {
+    browserName = "Edge";
+  } else if (userAgent.includes("Chrome")) {
+    if (navigator.brave) {
+      browserName = "Brave";
+    } else {
+      browserName = "Chrome";
+      // Verificação adicional para Edge baseado em plugins
+      if (hasPlugin("Microsoft Edge")) {
+        browserName = "Edge";
+      }
+      
+      // Verificação adicional para Edge baseado em informações do UserAgentData :D
+      if (hasUserAgentData("Brave")) {
+        browserName = "Brave";
+      }
+    }
+  } else if (userAgent.includes("Firefox")) {
+    browserName = "Firefox";
+  }
+
+  return browserName;
+}catch(e){
+  throw e;
+}
+}
+
+console.log(getBrowser());
+

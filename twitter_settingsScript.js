@@ -1,4 +1,4 @@
-var VERSAO="1.15";
+var VERSAO="1.15.65";
 document.querySelector("#versao").innerText=VERSAO;
 document.querySelector('textarea#CustomWord').addEventListener('change', function (item) {
  
@@ -38,6 +38,7 @@ var FUNCTION_SETTINGS = {
   NOTIFICATION_SEARCH:true,
   FILTER_ON_NOTIFICATION:false,
   Tweet_Scan_Palavras: {
+    BanEmotes:true,
     RemoveAutomated: true,
     NaoRemover_Customizadas: false,
     Block_User: false,
@@ -199,9 +200,12 @@ document
           FUNCTION_SETTINGS.NOTIFICATION_SEARCH = valor;
            break;
         
-        case 'ZoomImages':
-          FUNCTION_SETTINGS.PREVIEW_IMAGES = valor;
-          break;
+           case 'ZoomImages':
+            FUNCTION_SETTINGS.PREVIEW_IMAGES = valor;
+            break;
+            case 'NsfwEmotes':
+              FUNCTION_SETTINGS.Tweet_Scan_Palavras.BanEmotes = valor;
+              break;
 
         case 'RemoveSponsored':
           FUNCTION_SETTINGS.REMOVE_SPONSORED = valor;
@@ -261,7 +265,10 @@ document
   
   // Função para atualizar o conteúdo da extensão com base no idioma selecionado
   function updateContent(locale) {
-    loadMessages(locale, messages => {
+    loadMessages(locale, messages => { 
+      
+      
+      document.querySelector("#LeaveNotesPls").innerText=messages.nota.message;
       document.querySelector("#notas").href="wc/"+messages.lang.message+"/start.html"
       document.title = messages.extensionName.message;
       document.getElementById("title").innerText=messages.extensionName.message;
@@ -328,6 +335,8 @@ document
      document.querySelector("label[for='box_fastMute']").innerText=messages.fastMute.message;
      document.querySelector("label[for='box_fastQuotes']").innerText=messages.fastQuotes.message;
      antiSpam_percentageFindmessage = messages.antiSpam_percentageFind.message;
+     
+     document.querySelector("label[for='box_NsfwEmotes']").innerText=messages.remove_DefaultEmotes.message;
      //DESCRIPTIONS
      
      document.querySelector("div.box_ScanUrlCards").innerText=messages.filter_urlPreview.description;
@@ -365,12 +374,15 @@ document
      document.querySelector("div.box_verMenos").innerText=messages.fastSeeless.description;
      document.querySelector("div.box_fastMute").innerText=messages.fastMute.description;
      document.querySelector("div.box_fastQuotes").innerText=messages.fastQuotes.description;
+     document.querySelector("div.box_NsfwEmotes").innerText=messages.remove_DefaultEmotes.description;
     });
   }
   var antiSpam_percentageFindmessage="";
-  // Evento que é disparado quando o DOM é completamente carregado
+  
+
   document.addEventListener('DOMContentLoaded', () => {
-    // Recupera a preferência de idioma e atualiza o seletor e o conteúdo
+    
+
     getLanguagePreference(locale => {
       document.getElementById('language-selector').value = locale;
       updateContent(locale);
@@ -391,6 +403,26 @@ document
 
         port.postMessage({ action: "async_enabledFunctions",tipo: "popup" });
         port.postMessage({ action: "async_bannedWords",tipo: "popup" });
+      }
+      
+      if (message.action === 'NAVIGATOR_BYINFO') {
+switch(message.message){
+  case 'Brave':
+  document.querySelector("#notesUrl").href="https://chromewebstore.google.com/detail/controle-de-feed-para-twi/phdbbkmhjfmcnjifocjpncghgmffngna";
+  break;
+  case 'Chrome':
+  document.querySelector("#notesUrl").href="https://chromewebstore.google.com/detail/controle-de-feed-para-twi/phdbbkmhjfmcnjifocjpncghgmffngna";
+  break;
+  case 'Opera':
+  document.querySelector("#notesUrl").href="https://addons.opera.com/extensions/details/controle-de-feed-para-twitter/";
+  break;
+  case 'Edge':
+  document.querySelector("#notesUrl").href="https://microsoftedge.microsoft.com/addons/detail/feed-control-for-twitter/bmnopclkhmjkdkncliakmhohafebjjij";
+  break;
+  case 'Firefox':
+  document.querySelector("#notesUrl").href="https://addons.mozilla.org/firefox/addon/controle-de-feed-para-twitter/";
+  break;
+}
       }
     if (message.action === 'async_enabledFunctions') {
       itens = message.data.funcoesConfigs
@@ -415,6 +447,7 @@ document
 
       Tweet_Scan_Palavras.todo_tweet = itensTweetScanPalavras.todo_tweet;
       Tweet_Scan_Palavras.clearSearch = itensTweetScanPalavras.clearSearch;
+      Tweet_Scan_Palavras.BanEmotes = itensTweetScanPalavras.BanEmotes;
       Tweet_Scan_Palavras.use_regex = itensTweetScanPalavras.use_regex;
       Tweet_Scan_Palavras.remove_arabe = itensTweetScanPalavras.remove_arabe;
       Tweet_Scan_Palavras.remove_asiatico = itensTweetScanPalavras.remove_asiatico;
@@ -495,6 +528,8 @@ document
       document.querySelector('input#box_KeyNavi').checked = FUNCTION_SETTINGS.KEYBOARD_NAVIGATION;
       document.querySelector('input#box_SearchFix').checked = FUNCTION_SETTINGS.Tweet_Scan_Palavras.clearSearch;
       document.querySelector('input#box_NotificationSearch').checked = FUNCTION_SETTINGS.NOTIFICATION_SEARCH;
+      document.querySelector('input#box_SearchFix').checked = FUNCTION_SETTINGS.Tweet_Scan_Palavras.clearSearch;
+      document.querySelector('input#box_NsfwEmotes').checked = FUNCTION_SETTINGS.Tweet_Scan_Palavras.BanEmotes;
 
     }
 
