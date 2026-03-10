@@ -91,4 +91,4 @@ Os caracteres suportados até agora são:
   ![Lista predefinida de palavras banidas](img/midia.png)
 
   # MAIS EM BREVE !
-   - A extensão recebe atualizações constantes, caso tenha alguma sugestão ou bug pode me contactar no Twitter: https://x.com/CaiotaGames
+   - A extensão recebe atualizações constantes, caso tenha alguma sugestão ou bug pode me contactar no Discord: [https://x.com/CaiotaGames](https://discordapp.com/users/606186579983335444)
