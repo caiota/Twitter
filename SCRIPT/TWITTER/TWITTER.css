@@ -117,9 +117,9 @@ article #ArticleMessage{
 }
 .Blur{
   
-  -webkit-filter: blur(20px);
+  -webkit-filter: blur(20px) !important;
   
-          filter: blur(20px);
+          filter: blur(20px) !important;
 
 }
 .blurWord{
