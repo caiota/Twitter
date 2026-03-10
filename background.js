@@ -31,6 +31,7 @@ const FUNCTION_SETTINGS_PADRAO = {
     BanEmotes:true,
     RemoveAutomated: true,
     NaoRemover_Customizadas: false,
+    Mute_User:false,
     Block_User: false,
     todo_tweet: false,
     Scan_Cards: true,
@@ -244,6 +245,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
 var contextTitle=chrome.i18n.getMessage("context_title");
 chrome.runtime.onInstalled.addListener(details => {
+  console.error("INSTALADO!")
   chrome.contextMenus.create({
     id: "BanirPalavra",
     title: contextTitle,

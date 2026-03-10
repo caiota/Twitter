@@ -1,4 +1,4 @@
-var VERSAO="1.15.65";
+var VERSAO="1.17";
 document.querySelector("#versao").innerText=VERSAO;
 document.querySelector('textarea#CustomWord').addEventListener('change', function (item) {
  
@@ -42,6 +42,7 @@ var FUNCTION_SETTINGS = {
     RemoveAutomated: true,
     NaoRemover_Customizadas: false,
     Block_User: false,
+    Mute_User:false,
     todo_tweet: false,
     Scan_Cards: true,
     FullWord: false,
@@ -87,6 +88,8 @@ document
     inputElement.addEventListener('change', function (item) {
       document.querySelector("div#reloadTip").style.display = "block";
       valor = item.target.checked;
+      
+      console.log(item.target.getAttribute('valor'),valor)
       switch (item.target.getAttribute('valor')) {
         case 'ANTI_SPOILER':
           FUNCTION_SETTINGS.ANTI_SPOILER = valor;
@@ -216,9 +219,14 @@ document
         case 'Remover_Emotes':
           FUNCTION_SETTINGS.Tweet_Scan_Palavras.TweetEmotes = valor;
           break;
-        case 'BloquearOnFind':
-          FUNCTION_SETTINGS.Tweet_Scan_Palavras.Block_User = valor;
-          break;
+          case 'BloquearOnFind':
+            FUNCTION_SETTINGS.Tweet_Scan_Palavras.Block_User = valor;
+            FUNCTION_SETTINGS.Tweet_Scan_Palavras.Mute_User = false;
+            break;
+            case 'MuteOnFind':
+              FUNCTION_SETTINGS.Tweet_Scan_Palavras.Mute_User = valor;
+              FUNCTION_SETTINGS.Tweet_Scan_Palavras.Block_User = false;
+              break;
         case 'RemoveAutomated':
           FUNCTION_SETTINGS.Tweet_Scan_Palavras.RemoveAutomated = valor;
           break;
@@ -319,6 +327,7 @@ document
      document.querySelector("label[for='box_NotificationSearch']").innerText=messages.enable_searchNotifications.message;
      document.querySelector("label[for='box_ZoomImages']").innerText=messages.enable_imgPreview.message;
      document.querySelector("label[for='box_BlockPeople']").innerText=messages.block_onFind.message;
+     document.querySelector("label[for='box_MutePeople']").innerText=messages.mute_onFind.message;
      document.querySelector("label[for='box_RemoveCopyTweets']").innerText=messages.enable_antiSpam.message;
      document.querySelector("label[for='box_RemoveCopyTweets_Links']").innerText=messages.antiSpam_ignoreLinks.message;
      document.querySelector("span#rangeValue").innerText=messages.antiSpam_percentageFind.message;
@@ -360,6 +369,7 @@ document
      document.querySelector("div.box_NotificationSearch").innerText=messages.enable_searchNotifications.description;
      document.querySelector("div.box_ZoomImages").innerText=messages.enable_imgPreview.description;
      document.querySelector("div.box_BlockPeople").innerText=messages.block_onFind.description;
+     document.querySelector("div.box_MutePeople").innerText=messages.mute_onFind.description;
      document.querySelector("div.ParecidagemRange").innerText=messages.antiSpam_percentageFind.description;
      document.querySelector("div.box_RemoveCopyTweets_Links").innerText=messages.antiSpam_ignoreLinks.description;
      document.querySelector("div.box_PauseVideos").innerText=messages.pauseVideos.description;
@@ -467,6 +477,7 @@ switch(message.message){
       Tweet_Scan_Palavras.NaoRemover_Customizadas = itensTweetScanPalavras.NaoRemover_Customizadas;
       Tweet_Scan_Palavras.TweetEmotes = itensTweetScanPalavras.TweetEmotes;
       Tweet_Scan_Palavras.Block_User = itensTweetScanPalavras.Block_User;
+      Tweet_Scan_Palavras.Mute_User = itensTweetScanPalavras.Mute_User;
       Tweet_Scan_Palavras.RemoveAutomated = itensTweetScanPalavras.RemoveAutomated;
       // Outras Configurações
       FUNCTION_SETTINGS.Remover_Enquetes = itens.Remover_Enquetes;
@@ -522,6 +533,7 @@ switch(message.message){
       document.querySelector('input#box_CensuraPalavra').checked = FUNCTION_SETTINGS.Tweet_Scan_Palavras.NaoRemover_Customizadas;
       document.querySelector('input#box_NoEmotes').checked = FUNCTION_SETTINGS.Tweet_Scan_Palavras.TweetEmotes;
       document.querySelector('input#box_BlockPeople').checked = FUNCTION_SETTINGS.Tweet_Scan_Palavras.Block_User;
+      document.querySelector('input#box_MutePeople').checked = FUNCTION_SETTINGS.Tweet_Scan_Palavras.Mute_User;
       document.querySelector('input#box_RemoveAutomated').checked = FUNCTION_SETTINGS.Tweet_Scan_Palavras.RemoveAutomated;
       document.querySelector('input#box_AutoYoutube').checked = FUNCTION_SETTINGS.AUTOPLAY_YOUTUBE;
       document.querySelector('input#box_RemoveComplementary').checked = FUNCTION_SETTINGS.REMOVE_RIGHT_CONTENT;
